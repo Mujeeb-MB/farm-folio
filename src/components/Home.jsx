@@ -53,7 +53,7 @@ export default function Home() {
         <Typography
           component="h1"
           sx={{
-            fontSize: { xs: "1.5rem", md: "1.5rem", lg: "2rem" },
+            fontSize: { xs: "1.2rem", md: "1.5rem", lg: "2rem" },
             fontWeight: "bold",
             color: "#fff",
             cursor: "pointer",
@@ -67,18 +67,19 @@ export default function Home() {
       <Box
         sx={{
           position: "absolute",
-          top: "50%",
+          top: { xs: "40%", sm: "45%", md: "50%" },
           left: "50%",
           transform: "translate(-50%, -50%)",
           textAlign: "center",
           color: "#fff",
+          px: { xs: 2, sm: 4 },
         }}
       >
         {/* Main Heading */}
         <Typography
           component="h1"
           sx={{
-            fontSize: { xs: "2.5rem", md: "2.5rem", lg: "3rem" },
+            fontSize: { xs: "1.8rem", sm: "2.5rem", md: "3rem" },
             fontWeight: "bold",
             lineHeight: 1.2,
             animation: `${fadeIn} 2s ease-in-out`,
@@ -99,8 +100,8 @@ export default function Home() {
         <Typography
           component="p"
           sx={{
-            fontSize: { xs: "1rem", md: "1rem", lg: "1.3rem" },
-            marginTop: 4,
+            fontSize: { xs: "0.9rem", sm: "1rem", lg: "1.3rem" },
+            marginTop: 2,
             animation: `${fadeIn} 2s ease-in-out`,
           }}
         >
@@ -114,12 +115,13 @@ export default function Home() {
       <Box
         sx={{
           position: "absolute",
-          // bottom:16,
-          top: "70%",
+          top: { xs: "65%", sm: "70%" },
           left: "50%",
           transform: "translateX(-50%)",
           display: "flex",
-          gap: 4,
+          flexDirection: { xs: "column", sm: "row" },
+          gap: { xs: 2, sm: 4 },
+          alignItems: "center",
         }}
       >
         <Button
@@ -127,7 +129,7 @@ export default function Home() {
           sx={{
             borderRadius: "10px",
             padding: "8px 22px",
-            fontSize: "1rem",
+            fontSize: "0.9rem",
             textTransform: "none",
             color: "#000000",
             bgcolor: "#FFFFFF",
@@ -135,6 +137,7 @@ export default function Home() {
               backgroundColor: "#339961",
               color: "#FFF",
             },
+            width: { xs: "80%", sm: "auto" },
           }}
           onClick={() => navigate("/signup")}
         >
@@ -147,13 +150,14 @@ export default function Home() {
           sx={{
             borderRadius: "10px",
             padding: "8px 26px",
-            fontSize: "1rem",
+            fontSize: "0.9rem",
             textTransform: "none",
             color: "#FFF",
             "&:hover": {
               backgroundColor: "#FFF",
               color: "#000",
             },
+            width: { xs: "80%", sm: "auto" },
           }}
           onClick={() => navigate("/login")}
         >
