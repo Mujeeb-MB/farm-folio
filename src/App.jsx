@@ -10,7 +10,7 @@ import HomeView from "./views/HomeView";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#339961", // Amber
+      main: "#339961", //
     },
     secondary: {
       main: "#000000", // Black
