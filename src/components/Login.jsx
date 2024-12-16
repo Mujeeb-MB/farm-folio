@@ -20,6 +20,7 @@ import farmerImage from "../assets/farmer4.webp";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import MuiAlert from "@mui/material/Alert";
+import SigninWithGoogle from "./SigninWithGoogle";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -83,7 +84,7 @@ export default function Login() {
         message: "Login successful! Redirecting...",
         severity: "success",
       });
-      setTimeout(() => navigate("/dashboard"), 2000);
+      setTimeout(() => navigate("/profile"), 2000);
     } catch (error) {
       setSnackbar({
         open: true,
@@ -218,23 +219,8 @@ export default function Login() {
             >
               Login
             </Button>
-            <Button
-              startIcon={<GoogleIcon sx={{ color: "#339961" }} />}
-              variant="contained"
-              fullWidth
-              sx={{
-                bgcolor: "#000",
-                color: "#FFF",
-                marginTop: "10px",
-                borderRadius: "12px",
-                padding: "10px",
-                fontSize: "16px",
-                fontWeight: "600",
-                textTransform: "none",
-              }}
-            >
-              Continue with Google
-            </Button>
+
+            <SigninWithGoogle />
           </Box>
 
           <Divider

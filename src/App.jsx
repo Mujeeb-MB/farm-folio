@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import HomeView from "./views/HomeView";
+import Profile from "./components/Profile";
 
 // Define the theme with Poppins
 const theme = createTheme({
@@ -29,6 +30,7 @@ function App() {
           <Route path="/" element={<HomeView />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Router>
     </ThemeProvider>

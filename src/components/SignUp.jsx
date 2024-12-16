@@ -10,7 +10,6 @@ import {
   InputAdornment,
   Snackbar,
 } from "@mui/material";
-import { Google as GoogleIcon } from "@mui/icons-material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import farmerImage from "../assets/farmer2.webp";
@@ -18,6 +17,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase/firebase";
 import { setDoc, doc } from "firebase/firestore";
 import MuiAlert from "@mui/material/Alert";
+import SigninWithGoogle from "./SigninWithGoogle";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -112,6 +112,7 @@ export default function SignUp() {
           email: user.email,
           firstName: formData.firstName,
           lastName: formData.lastName,
+          photo: "",
         });
       }
       setSnackbar({
@@ -305,6 +306,9 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
+
+            {/* Google.... */}
+            <SigninWithGoogle />
           </Box>
 
           {/* Divider and Login Link */}
