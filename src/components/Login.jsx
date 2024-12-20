@@ -1,3 +1,4 @@
+// Login.jsx
 import React, { useState } from "react";
 import {
   Box,
@@ -10,11 +11,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import {
-  Google as GoogleIcon,
-  Visibility,
-  VisibilityOff,
-} from "@mui/icons-material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import farmerImage from "../assets/farmer4.webp";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -29,75 +26,82 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function Login() {
   const navigate = useNavigate();
 
+  // State for form values and errors
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
   });
 
-  const [formErrors, setFormErrors] = useState({
-    email: "",
-    password: "",
-  });
+  const [formErrors, setFormErrors] = useState({});
 
   const [showPassword, setShowPassword] = useState(false);
+
+  // Snackbar state for user feedback
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
-    severity: "success", // "success" | "error"
+    severity: "success", // can be "success" or "error"
   });
 
-  const validateEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  // Function to handle input changes and reset errors
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+
+    // Remove error message as user types
+    setFormErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  const validatePassword = (password) => {
-    return password.length >= 6;
-  };
+  // Function to validate form inputs
+  const validateForm = () => {
+    const errors = {};
 
-  const handleInputChange = (field, value) => {
-    setFormValues((prev) => ({ ...prev, [field]: value }));
-
-    if (field === "email") {
-      setFormErrors((prev) => ({
-        ...prev,
-        email: validateEmail(value) ? "" : "Enter a valid email address",
-      }));
-    } else if (field === "password") {
-      setFormErrors((prev) => ({
-        ...prev,
-        password: validatePassword(value)
-          ? ""
-          : "Password must be at least 6 characters",
-      }));
+    if (!formValues.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formValues.email)) {
+      errors.email = "Enter a valid email address";
     }
-  };
 
-  const handleFirebase = async () => {
-    try {
-      await signInWithEmailAndPassword(
-        auth,
-        formValues.email,
-        formValues.password
-      );
-      setSnackbar({
-        open: true,
-        message: "Login successful! Redirecting...",
-        severity: "success",
-      });
-      setTimeout(() => navigate("/profile"), 2000);
-    } catch (error) {
-      setSnackbar({
-        open: true,
-        message: error.message || "Login failed. Please try again.",
-        severity: "error",
-      });
+    if (!formValues.password) {
+      errors.password = "Password is required";
     }
+
+    return errors;
   };
 
-  const handleSubmit = (event) => {
+  // Function to handle form submission
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!formErrors.email && !formErrors.password) {
-      handleFirebase();
+
+    const errors = validateForm();
+    setFormErrors(errors);
+
+    // If there are no errors, proceed to sign in
+    if (Object.keys(errors).length === 0) {
+      try {
+        await signInWithEmailAndPassword(
+          auth,
+          formValues.email,
+          formValues.password
+        );
+
+        setSnackbar({
+          open: true,
+          message: "Login successful! Redirecting...",
+          severity: "success",
+        });
+
+        // Redirect after a short delay
+        setTimeout(() => navigate("/profile"), 2000);
+      } catch (error) {
+        // Handle authentication errors
+        setSnackbar({
+          open: true,
+          message: error.message || "Login failed. Please try again.",
+          severity: "error",
+        });
+      }
     } else {
       setSnackbar({
         open: true,
@@ -107,6 +111,7 @@ export default function Login() {
     }
   };
 
+  // Function to close the snackbar
   const handleCloseSnackbar = () => {
     setSnackbar((prev) => ({ ...prev, open: false }));
   };
@@ -118,12 +123,12 @@ export default function Login() {
         item
         xs={12}
         md={6}
-        style={{
+        sx={{
           backgroundImage: `url(${farmerImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-      ></Grid>
+      />
 
       {/* Right Login Form Section */}
       <Grid item xs={12} md={6}>
@@ -135,67 +140,66 @@ export default function Login() {
           alignItems="center"
           height="100vh"
         >
+          {/* Header */}
           <Typography
             variant="h4"
             gutterBottom
             color="primary"
-            sx={{
-              fontWeight: "600",
-              textAlign: "center",
-            }}
+            sx={{ fontWeight: 600, textAlign: "center" }}
           >
             Welcome Back
           </Typography>
           <Typography
             variant="subtitle2"
             gutterBottom
-            style={{
-              color: "#666",
-              textAlign: "center",
-              marginBottom: "24px",
-            }}
+            sx={{ color: "text.secondary", textAlign: "center", mb: 3 }}
           >
             Track your farms effortlessly with FarmFolio.
           </Typography>
 
+          {/* Login Form */}
           <Box
-            width="100%"
-            maxWidth="400px"
             component="form"
+            width="100%"
+            maxWidth={400}
             display="flex"
             flexDirection="column"
             gap={2}
             onSubmit={handleSubmit}
+            noValidate
           >
             <TextField
               label="Email"
+              name="email"
               type="email"
               fullWidth
               variant="outlined"
               value={formValues.email}
-              onChange={(e) => handleInputChange("email", e.target.value)}
+              onChange={handleInputChange}
               error={!!formErrors.email}
               helperText={formErrors.email}
               InputProps={{
-                style: { borderRadius: "8px" },
+                sx: { borderRadius: 1 },
               }}
             />
             <TextField
               label="Password"
+              name="password"
               type={showPassword ? "text" : "password"}
               fullWidth
               variant="outlined"
               value={formValues.password}
-              onChange={(e) => handleInputChange("password", e.target.value)}
+              onChange={handleInputChange}
               error={!!formErrors.password}
               helperText={formErrors.password}
               InputProps={{
-                style: { borderRadius: "8px" },
+                sx: { borderRadius: 1 },
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
-                      onClick={() => setShowPassword(!showPassword)}
+                      onClick={() => setShowPassword((prev) => !prev)}
                       edge="end"
+                      aria-label="toggle password visibility"
                     >
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
@@ -203,55 +207,52 @@ export default function Login() {
                 ),
               }}
             />
+
             <Button
+              type="submit"
               variant="contained"
               color="primary"
               fullWidth
-              onClick={handleSubmit}
               sx={{
-                marginTop: "12px",
-                borderRadius: "12px",
-                padding: "10px",
+                mt: 2,
+                borderRadius: 2,
+                p: 1.5,
                 fontSize: "16px",
-                fontWeight: "600",
+                fontWeight: 600,
                 textTransform: "none",
               }}
+              aria-label="Login"
             >
               Login
             </Button>
 
+            {/* Google Sign-In Button */}
             <SigninWithGoogle />
           </Box>
 
-          <Divider
-            sx={{ margin: "24px 0", width: "100%", maxWidth: "400px" }}
-          />
-          <Typography
-            variant="body2"
-            sx={{
-              textAlign: "center",
-            }}
-          >
+          {/* Divider and Sign-up Link */}
+          <Divider sx={{ my: 4, width: "100%", maxWidth: 400 }} />
+          <Typography variant="body2" sx={{ textAlign: "center" }}>
             Don't have an account?{" "}
-            <Link
-              to="/signup"
-              style={{
-                textDecoration: "none",
-                color: "#339961",
-              }}
-            >
-              Sign up now
+            <Link to="/signup" style={{ textDecoration: "none" }}>
+              <Typography
+                component="span"
+                color="primary.main"
+                sx={{ fontWeight: 500 }}
+              >
+                Sign up now
+              </Typography>
             </Link>
           </Typography>
         </Box>
       </Grid>
 
-      {/* Snackbar */}
+      {/* Snackbar for notifications */}
       <Snackbar
         open={snackbar.open}
-        autoHideDuration={3000}
+        autoHideDuration={4000}
         onClose={handleCloseSnackbar}
-        anchorOrigin={{ vertical: "top", horizontal: "left" }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert
           onClose={handleCloseSnackbar}

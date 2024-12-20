@@ -1,5 +1,6 @@
-import { Button } from "@mui/material";
+// SigninWithGoogle.jsx
 import React from "react";
+import { Button } from "@mui/material";
 import { Google as GoogleIcon } from "@mui/icons-material";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth, db } from "../firebase/firebase";
@@ -8,23 +9,30 @@ import { doc, setDoc } from "firebase/firestore";
 
 export default function SigninWithGoogle() {
   const navigate = useNavigate();
-  const handleSubmit = () => {
+
+  const handleSubmit = async () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider).then(async (result) => {
-      console.log(result);
+    try {
+      const result = await signInWithPopup(auth, provider);
       const user = result.user;
+
       if (user) {
+        // Save user info to Firestore
         await setDoc(doc(db, "Users", user.uid), {
           email: user.email,
           firstName: user.displayName,
-          lastName: "",
+          lastName: "", // Google doesn't provide last name separately
           photo: user.photoURL,
         });
 
         navigate("/profile");
       }
-    });
+    } catch (error) {
+      console.error("Google sign-in error:", error);
+      // Optionally, display an error message to the user
+    }
   };
+
   return (
     <Button
       startIcon={<GoogleIcon sx={{ color: "#339961" }} />}
@@ -34,13 +42,17 @@ export default function SigninWithGoogle() {
       sx={{
         bgcolor: "#000",
         color: "#FFF",
-        marginTop: "10px",
+        mt: 2,
         borderRadius: "12px",
-        padding: "10px",
+        p: 1.5,
         fontSize: "16px",
         fontWeight: "600",
         textTransform: "none",
+        "&:hover": {
+          bgcolor: "#333",
+        },
       }}
+      aria-label="Sign in with Google"
     >
       Continue with Google
     </Button>

@@ -1,3 +1,4 @@
+// SignUp.jsx
 import React, { useState } from "react";
 import {
   Box,
@@ -11,7 +12,7 @@ import {
   Snackbar,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import farmerImage from "../assets/farmer2.webp";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase/firebase";
@@ -24,6 +25,9 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
+  // State for form data and errors
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -32,115 +36,126 @@ export default function SignUp() {
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
+
+  // State for password visibility toggles
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Snackbar state for user feedback
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
-    severity: "success",
+    severity: "success", // can be "success" or "error"
   });
 
-  const validate = (field, value) => {
-    const newErrors = { ...errors };
-
-    if (field === "firstName" || field === "lastName") {
-      if (!value.trim()) {
-        newErrors[field] = "This field is required";
-      } else if (!/^[A-Za-z]+$/.test(value)) {
-        newErrors[field] = "Only letters are allowed";
-      } else {
-        delete newErrors[field];
-      }
-    }
-
-    if (field === "email") {
-      if (!value.trim()) {
-        newErrors.email = "Email is required";
-      } else if (!/\S+@\S+\.\S+/.test(value)) {
-        newErrors.email = "Email is invalid";
-      } else {
-        delete newErrors.email;
-      }
-    }
-
-    if (field === "password") {
-      if (!value.trim()) {
-        newErrors.password = "Password is required";
-      } else if (value.length < 6) {
-        newErrors.password = "Password must be at least 6 characters";
-      } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
-        newErrors.password =
-          "Password must contain at least one special character";
-      } else {
-        delete newErrors.password;
-      }
-    }
-
-    if (field === "confirmPassword") {
-      if (value !== formData.password) {
-        newErrors.confirmPassword = "Passwords do not match";
-      } else {
-        delete newErrors.confirmPassword;
-      }
-    }
-
-    setErrors(newErrors);
-  };
-
+  // Function to handle input changes and reset errors
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
 
-    // Validate while typing
-    validate(name, value);
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Remove error message as user types
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  const handleSnackbarClose = () => {
-    setSnackbar({ ...snackbar, open: false });
+  // Function to validate the form inputs
+  const validateForm = () => {
+    const errors = {};
+
+    // First Name Validation
+    if (!formData.firstName.trim()) {
+      errors.firstName = "First name is required";
+    } else if (!/^[A-Za-z]+$/.test(formData.firstName)) {
+      errors.firstName = "Only letters are allowed";
+    }
+
+    // Last Name Validation
+    if (!formData.lastName.trim()) {
+      errors.lastName = "Last name is required";
+    } else if (!/^[A-Za-z]+$/.test(formData.lastName)) {
+      errors.lastName = "Only letters are allowed";
+    }
+
+    // Email Validation
+    if (!formData.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = "Email is invalid";
+    }
+
+    // Password Validation
+    if (!formData.password) {
+      errors.password = "Password is required";
+    } else if (formData.password.length < 6) {
+      errors.password = "Password must be at least 6 characters";
+    } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(formData.password)) {
+      errors.password = "Password must contain at least one special character";
+    }
+
+    // Confirm Password Validation
+    if (formData.confirmPassword !== formData.password) {
+      errors.confirmPassword = "Passwords do not match";
+    }
+
+    return errors;
   };
 
-  const handleFirebase = async () => {
-    try {
-      await createUserWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
-      const user = auth.currentUser;
-      if (user) {
-        await setDoc(doc(db, "Users", user.uid), {
-          email: user.email,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          photo: "",
+  // Function to handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const validationErrors = validateForm();
+    setErrors(validationErrors);
+
+    // If there are no errors, proceed to create account
+    if (Object.keys(validationErrors).length === 0) {
+      try {
+        await createUserWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password
+        );
+
+        const user = auth.currentUser;
+
+        if (user) {
+          // Save user info to Firestore
+          await setDoc(doc(db, "Users", user.uid), {
+            email: user.email,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            photo: "", // Placeholder for photo URL
+          });
+        }
+
+        setSnackbar({
+          open: true,
+          message: "Sign-up successful! Redirecting...",
+          severity: "success",
+        });
+
+        // Redirect after a short delay
+        setTimeout(() => navigate("/profile"), 2000);
+      } catch (error) {
+        // Handle authentication errors
+        setSnackbar({
+          open: true,
+          message: `Sign-up failed: ${error.message}`,
+          severity: "error",
         });
       }
+    } else {
       setSnackbar({
         open: true,
-        message: "Sign-up successful!",
-        severity: "success",
-      });
-    } catch (error) {
-      setSnackbar({
-        open: true,
-        message: `Sign-up failed: ${error.message}`,
+        message: "Please fix the form errors before submitting.",
         severity: "error",
       });
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Final validation check before submission
-    const allFieldsValid = Object.keys(formData).every((key) => {
-      validate(key, formData[key]);
-      return !errors[key];
-    });
-
-    if (allFieldsValid) {
-      handleFirebase();
-    }
+  // Function to close the snackbar
+  const handleSnackbarClose = () => {
+    setSnackbar((prev) => ({ ...prev, open: false }));
   };
 
   return (
@@ -150,12 +165,12 @@ export default function SignUp() {
         item
         xs={12}
         md={6}
-        style={{
+        sx={{
           backgroundImage: `url(${farmerImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-      ></Grid>
+      />
 
       {/* Right Side with Sign-Up Form */}
       <Grid item xs={12} md={6}>
@@ -172,35 +187,30 @@ export default function SignUp() {
             variant="h4"
             color="primary"
             gutterBottom
-            sx={{
-              fontWeight: "600",
-              textAlign: "center",
-            }}
+            sx={{ fontWeight: 600, textAlign: "center" }}
           >
             Join FarmFolio
           </Typography>
           <Typography
             variant="subtitle2"
             gutterBottom
-            sx={{
-              color: "#666",
-              marginBottom: "24px",
-              textAlign: "center",
-            }}
+            sx={{ color: "text.secondary", mb: 3, textAlign: "center" }}
           >
             Empower your farming journey with ease.
           </Typography>
 
-          {/* Form Section */}
+          {/* Sign-Up Form */}
           <Box
-            width="100%"
-            maxWidth="400px"
             component="form"
+            width="100%"
+            maxWidth={400}
             display="flex"
             flexDirection="column"
             gap={2}
             onSubmit={handleSubmit}
+            noValidate
           >
+            {/* First Name Field */}
             <TextField
               label="First Name"
               name="firstName"
@@ -208,12 +218,14 @@ export default function SignUp() {
               onChange={handleChange}
               fullWidth
               variant="outlined"
-              InputProps={{
-                style: { borderRadius: "8px" },
-              }}
               error={!!errors.firstName}
               helperText={errors.firstName}
+              InputProps={{
+                sx: { borderRadius: 1 },
+              }}
             />
+
+            {/* Last Name Field */}
             <TextField
               label="Last Name"
               name="lastName"
@@ -221,12 +233,14 @@ export default function SignUp() {
               onChange={handleChange}
               fullWidth
               variant="outlined"
-              InputProps={{
-                style: { borderRadius: "8px" },
-              }}
               error={!!errors.lastName}
               helperText={errors.lastName}
+              InputProps={{
+                sx: { borderRadius: 1 },
+              }}
             />
+
+            {/* Email Field */}
             <TextField
               label="Email"
               name="email"
@@ -234,12 +248,14 @@ export default function SignUp() {
               onChange={handleChange}
               fullWidth
               variant="outlined"
-              InputProps={{
-                style: { borderRadius: "8px" },
-              }}
               error={!!errors.email}
               helperText={errors.email}
+              InputProps={{
+                sx: { borderRadius: 1 },
+              }}
             />
+
+            {/* Password Field */}
             <TextField
               label="Password"
               name="password"
@@ -248,22 +264,25 @@ export default function SignUp() {
               type={showPassword ? "text" : "password"}
               fullWidth
               variant="outlined"
+              error={!!errors.password}
+              helperText={errors.password}
               InputProps={{
-                style: { borderRadius: "8px" },
+                sx: { borderRadius: 1 },
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
-                      onClick={() => setShowPassword(!showPassword)}
+                      onClick={() => setShowPassword((prev) => !prev)}
                       edge="end"
+                      aria-label="toggle password visibility"
                     >
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
-              error={!!errors.password}
-              helperText={errors.password}
             />
+
+            {/* Confirm Password Field */}
             <TextField
               label="Confirm Password"
               name="confirmPassword"
@@ -272,56 +291,59 @@ export default function SignUp() {
               type={showConfirmPassword ? "text" : "password"}
               fullWidth
               variant="outlined"
+              error={!!errors.confirmPassword}
+              helperText={errors.confirmPassword}
               InputProps={{
-                style: { borderRadius: "8px" },
+                sx: { borderRadius: 1 },
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
-                      onClick={() =>
-                        setShowConfirmPassword(!showConfirmPassword)
-                      }
+                      onClick={() => setShowConfirmPassword((prev) => !prev)}
                       edge="end"
+                      aria-label="toggle confirm password visibility"
                     >
                       {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
-              error={!!errors.confirmPassword}
-              helperText={errors.confirmPassword}
             />
+
+            {/* Sign-Up Button */}
             <Button
+              type="submit"
               variant="contained"
               color="primary"
               fullWidth
-              onClick={handleSubmit}
-              style={{
-                marginTop: "12px",
-                borderRadius: "12px",
-                padding: "10px",
+              sx={{
+                mt: 2,
+                borderRadius: 2,
+                p: 1.5,
                 fontSize: "16px",
-                fontWeight: "600",
+                fontWeight: 600,
                 textTransform: "none",
               }}
+              aria-label="Sign Up"
             >
               Sign Up
             </Button>
 
-            {/* Google.... */}
+            {/* Google Sign-In Button */}
             <SigninWithGoogle />
           </Box>
 
           {/* Divider and Login Link */}
-          <Divider
-            sx={{ margin: "24px 0", width: "100%", maxWidth: "400px" }}
-          />
+          <Divider sx={{ my: 4, width: "100%", maxWidth: 400 }} />
           <Typography variant="body2" align="center">
             Already have an account?{" "}
-            <Link
-              to="/login"
-              style={{ textDecoration: "none", color: "#339961" }}
-            >
-              Sign in
+            <Link to="/login" style={{ textDecoration: "none" }}>
+              <Typography
+                component="span"
+                color="primary.main"
+                sx={{ fontWeight: 500 }}
+              >
+                Sign in
+              </Typography>
             </Link>
           </Typography>
         </Box>
@@ -330,9 +352,9 @@ export default function SignUp() {
       {/* Snackbar for notifications */}
       <Snackbar
         open={snackbar.open}
-        autoHideDuration={3000}
+        autoHideDuration={4000}
         onClose={handleSnackbarClose}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert
           onClose={handleSnackbarClose}
