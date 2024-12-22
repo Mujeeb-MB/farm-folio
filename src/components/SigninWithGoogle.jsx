@@ -1,4 +1,3 @@
-// src/components/SigninWithGoogle.jsx
 import React from "react";
 import { Button } from "@mui/material";
 import { Google as GoogleIcon } from "@mui/icons-material";
