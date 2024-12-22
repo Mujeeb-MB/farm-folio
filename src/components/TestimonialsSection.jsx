@@ -1,20 +1,23 @@
 import React from "react";
 import { Box, Typography, Grid, Avatar, Container } from "@mui/material";
+import TestFarm1 from "../assets/TestFarm1.jpg";
+import TestFarm2 from "../assets/TestFarm2.jpg";
+import TestFarm3 from "../assets/TestFarm3.jpg";
 
 const testimonials = [
   {
-    name: "John Doe",
-    image: "john.jpg", // Replace with your image paths
+    name: "Malik Sk",
+    image: TestFarm1, // Replace with your image paths
     quote: "FarmerFolio has transformed the way I manage my farm expenses.",
   },
   {
-    name: "Jane Smith",
-    image: "jane.jpg",
+    name: "Nannemiya",
+    image: TestFarm2,
     quote: "The analytics feature helped me identify areas to cut costs.",
   },
   {
-    name: "Bob Johnson",
-    image: "bob.jpg",
+    name: "Zain Md",
+    image: TestFarm3,
     quote: "I love how easy it is to track my inventory and plan crops.",
   },
 ];
@@ -31,8 +34,8 @@ export default function TestimonialsSection() {
             <Grid item xs={12} md={4} key={index}>
               <Box sx={{ textAlign: "center", px: 2 }}>
                 <Avatar
-                  //   src={require(`../assets/${testimonial.image}`).default}
-                  src=""
+                  // src={require(`../assets/${testimonial.image}`).default}
+                  src={testimonial.image}
                   alt={testimonial.name}
                   sx={{ width: 80, height: 80, margin: "0 auto" }}
                 />
