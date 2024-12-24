@@ -53,7 +53,7 @@ function App() {
               }
             />
             <Route
-              path="/farms"
+              path="/farm-management"
               element={
                 <ProtectedRoute>
                   <DashboardLayout>

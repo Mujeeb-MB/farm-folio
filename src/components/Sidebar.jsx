@@ -27,7 +27,7 @@ const drawerWidth = 240;
 
 const menuItems = [
   { text: "Dashboard", icon: <Dashboard />, path: "/dashboard" },
-  { text: "Farm Management", icon: <Agriculture />, path: "/farms" },
+  { text: "Farm Management", icon: <Agriculture />, path: "/farm-management" },
   { text: "Expense Tracking", icon: <Receipt />, path: "/expenses" },
   { text: "Reports & Analytics", icon: <Analytics />, path: "/reports" },
 ];
