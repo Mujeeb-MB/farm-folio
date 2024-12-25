@@ -15,6 +15,7 @@ import Reports from "./pages/Reports";
 import Profile from "./components/Profile";
 import Settings from "./pages/Settings";
 import Privacy from "./pages/Privacy";
+import FarmAI from "./pages/FarmAI";
 
 const theme = createTheme({
   palette: {
@@ -78,6 +79,16 @@ function App() {
                 <ProtectedRoute>
                   <DashboardLayout>
                     <Reports />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/farm-ai"
+              element={
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <FarmAI />
                   </DashboardLayout>
                 </ProtectedRoute>
               }
