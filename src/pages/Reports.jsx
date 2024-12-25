@@ -17,9 +17,9 @@ import { useAuth } from "../context/AuthContext";
 import { db } from "../firebase/firebase";
 import { collection, query, getDocs } from "firebase/firestore";
 import ExpenseAnalysis from "../components/Reports/ExpenseAnalysis";
-// import CategoryAnalysis from "../components/Reports/CategoryAnalysis";
-// import MonthlyTrends from "../components/Reports/MonthlyTrends";
-// import PaymentAnalysis from "../components/Reports/PaymentAnalysis";
+import CategoryAnalysis from "../components/Reports/CategoryAnalysis";
+import MonthlyTrends from "../components/Reports/MonthlyTrends";
+import PaymentAnalysis from "../components/Reports/PaymentAnalysis";
 
 export default function Reports() {
   const { currentUser } = useAuth();
@@ -129,13 +129,13 @@ export default function Reports() {
             <ExpenseAnalysis expenses={expenses} />
           </Grid>
           <Grid item xs={12} md={6}>
-            {/* <CategoryAnalysis expenses={expenses} /> */}
+            <CategoryAnalysis expenses={expenses} />
           </Grid>
           <Grid item xs={12} md={6}>
-            {/* <PaymentAnalysis expenses={expenses} /> */}
+            <PaymentAnalysis expenses={expenses} />
           </Grid>
           <Grid item xs={12}>
-            {/* <MonthlyTrends expenses={expenses} /> */}
+            <MonthlyTrends expenses={expenses} />
           </Grid>
         </Grid>
       ) : selectedFarm ? (
