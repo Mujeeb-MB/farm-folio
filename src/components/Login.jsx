@@ -100,7 +100,7 @@ export default function Login() {
           open: true,
           message: error.message || "Login failed. Please try again.",
           severity: "error",
-        });
+        }); 
       }
     } else {
       setSnackbar({
