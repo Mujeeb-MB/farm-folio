@@ -1,6 +1,11 @@
 // src/App.jsx
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -31,11 +36,38 @@ const theme = createTheme({
   },
 });
 
+const DynamicTitle = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Define page titles based on route paths
+    const pageTitles = {
+      "/": "Farmfolio - Home",
+      "/login": "Farmfolio - Login",
+      "/signup": "Farmfolio - SignUp",
+      "/dashboard": "Farmfolio - Dashboard",
+      "/farm-management": "Farmfolio - Farm Management",
+      "/expenses": "Farmfolio - Expenses",
+      "/reports": "Farmfolio - Reports",
+      "/farm-ai": "Farmfolio - FarmAI",
+      "/profile": "Farmfolio - Profile",
+      "/settings": "Farmfolio - Settings",
+      "/privacy": "Farmfolio - Privacy",
+    };
+
+    document.title = pageTitles[location.pathname] || "Farmfolio";
+  }, [location]);
+
+  return null;
+};
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
         <Router>
+          <DynamicTitle />
+
           <Routes>
             {/* Public routes */}
             <Route path="/" element={<Home />} />
