@@ -6,10 +6,11 @@ import { auth, db } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
-export default function SigninWithGoogle() {
+export default function SigninWithGoogle({ setShowLoading }) {
   const navigate = useNavigate();
 
   const handleGoogleSignIn = async () => {
+    setShowLoading(true);
     try {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
@@ -31,8 +32,12 @@ export default function SigninWithGoogle() {
       }
 
       // Navigate to dashboard after successful sign-in
-      navigate("/dashboard");
+      setTimeout(() => {
+        setShowLoading(false);
+        navigate("/dashboard");
+      }, 3000);
     } catch (error) {
+      setShowLoading(false);
       console.error("Error signing in with Google:", error);
       // You might want to show an error message to the user here
     }

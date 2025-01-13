@@ -20,12 +20,16 @@ import { setDoc, doc } from "firebase/firestore";
 import MuiAlert from "@mui/material/Alert";
 import SigninWithGoogle from "./SigninWithGoogle";
 
+import LoadingAnimation from "./common/LoadingAnimation";
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 export default function SignUp() {
   const navigate = useNavigate();
+
+  const [showLoading, setShowLoading] = useState(false);
 
   // State for form data and errors
   const [formData, setFormData] = useState({
@@ -103,6 +107,7 @@ export default function SignUp() {
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setShowLoading(true);
 
     const validationErrors = validateForm();
     setErrors(validationErrors);
@@ -135,8 +140,13 @@ export default function SignUp() {
         });
 
         // Redirect after a short delay
-        setTimeout(() => navigate("/profile"), 2000);
+        setTimeout(() => {
+          setShowLoading(false);
+          navigate("/dashboard");
+        }, 3000);
       } catch (error) {
+        setShowLoading(false);
+
         // Handle authentication errors
         setSnackbar({
           open: true,
@@ -329,7 +339,7 @@ export default function SignUp() {
             </Button>
 
             {/* Google Sign-In Button */}
-            <SigninWithGoogle />
+            <SigninWithGoogle setShowLoading={setShowLoading} />
           </Box>
 
           {/* Divider and Login Link */}
@@ -364,6 +374,8 @@ export default function SignUp() {
           {snackbar.message}
         </Alert>
       </Snackbar>
+
+      {showLoading && <LoadingAnimation message="Welcome to FARMFOLIO..." />}
     </Grid>
   );
 }

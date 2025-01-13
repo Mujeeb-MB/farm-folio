@@ -31,7 +31,7 @@ import {
 // Colors for different payment statuses
 const STATUS_COLORS = {
   Paid: "#2e7d32", // success.main
-  Pending: "#ed6c02", // warning.main
+  Pending: "#DC143C", // warning.main
 };
 
 // Colors for different payment modes

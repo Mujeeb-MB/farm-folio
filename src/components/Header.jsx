@@ -18,7 +18,7 @@ export default function Header() {
       position="absolute" // Changed from 'static' to 'absolute' to overlay on hero image
       color="transparent"
       elevation={0}
-      sx={{ top: 0 }} // Ensure it's at the top of the page
+      sx={{ top: 0, mt: 5 }} // Ensure it's at the top of the page
     >
       <Container maxWidth="lg">
         <Toolbar disableGutters>
@@ -28,14 +28,14 @@ export default function Header() {
             component="div"
             sx={{
               flexGrow: 1,
-              fontWeight: "bold",
               cursor: "pointer",
               color: "#fff", // White color to be visible over the image
               fontSize: "32px",
             }}
             onClick={() => navigate("/")}
           >
-            <span style={{ color: "#40bf79" }}>F</span>armFolio.
+            <span style={{ color: "#40bf79", fontWeight: "bold" }}>Farm</span>
+            Folio.
           </Typography>
 
           {/* Auth Buttons */}

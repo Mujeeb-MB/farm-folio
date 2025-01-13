@@ -80,7 +80,7 @@ export default function ExpenseOverview({ expenses }) {
               <Bar
                 dataKey="pending"
                 name="Pending"
-                fill="#ed6c02"
+                fill="#DC143C"
                 stackId="a"
               />
             </BarChart>

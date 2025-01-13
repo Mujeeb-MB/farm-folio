@@ -19,6 +19,8 @@ import { auth } from "../firebase/firebase";
 import MuiAlert from "@mui/material/Alert";
 import SigninWithGoogle from "./SigninWithGoogle";
 
+import LoadingAnimation from "./common/LoadingAnimation";
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -42,6 +44,8 @@ export default function Login() {
     message: "",
     severity: "success", // can be "success" or "error"
   });
+
+  const [showLoading, setShowLoading] = useState(false);
 
   // Function to handle input changes and reset errors
   const handleInputChange = (e) => {
@@ -73,6 +77,7 @@ export default function Login() {
   // Function to handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setShowLoading(true);
 
     const errors = validateForm();
     setFormErrors(errors);
@@ -93,14 +98,19 @@ export default function Login() {
         });
 
         // Redirect after a short delay
-        setTimeout(() => navigate("/profile"), 2000);
+        setTimeout(() => {
+          setShowLoading(false);
+          navigate("/dashboard");
+        }, 3000);
       } catch (error) {
+        setShowLoading(false);
+
         // Handle authentication errors
         setSnackbar({
           open: true,
           message: error.message || "Login failed. Please try again.",
           severity: "error",
-        }); 
+        });
       }
     } else {
       setSnackbar({
@@ -227,7 +237,7 @@ export default function Login() {
             </Button>
 
             {/* Google Sign-In Button */}
-            <SigninWithGoogle />
+            <SigninWithGoogle setShowLoading={setShowLoading} />
           </Box>
 
           {/* Divider and Sign-up Link */}
@@ -262,6 +272,8 @@ export default function Login() {
           {snackbar.message}
         </Alert>
       </Snackbar>
+
+      {showLoading && <LoadingAnimation message="Welcome to FARMFOLIO..." />}
     </Grid>
   );
 }
