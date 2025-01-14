@@ -234,7 +234,6 @@ export default function SignUp() {
                 sx: { borderRadius: 1 },
               }}
             />
-
             {/* Last Name Field */}
             <TextField
               label="Last Name"
@@ -249,7 +248,6 @@ export default function SignUp() {
                 sx: { borderRadius: 1 },
               }}
             />
-
             {/* Email Field */}
             <TextField
               label="Email"
@@ -264,7 +262,6 @@ export default function SignUp() {
                 sx: { borderRadius: 1 },
               }}
             />
-
             {/* Password Field */}
             <TextField
               label="Password"
@@ -291,7 +288,6 @@ export default function SignUp() {
                 ),
               }}
             />
-
             {/* Confirm Password Field */}
             <TextField
               label="Confirm Password"
@@ -318,7 +314,6 @@ export default function SignUp() {
                 ),
               }}
             />
-
             {/* Sign-Up Button */}
             <Button
               type="submit"
@@ -337,9 +332,11 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
-
             {/* Google Sign-In Button */}
-            <SigninWithGoogle setShowLoading={setShowLoading} />
+            <SigninWithGoogle
+              setShowLoading={setShowLoading}
+              setSnackbar={setSnackbar}
+            />
           </Box>
 
           {/* Divider and Login Link */}

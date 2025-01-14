@@ -6,7 +6,7 @@ import { auth, db } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
-export default function SigninWithGoogle({ setShowLoading }) {
+export default function SigninWithGoogle({ setShowLoading, setSnackbar }) {
   const navigate = useNavigate();
 
   const handleGoogleSignIn = async () => {
@@ -16,30 +16,50 @@ export default function SigninWithGoogle({ setShowLoading }) {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      // Check if user document exists
-      const userDocRef = doc(db, "Users", user.uid);
-      const userDoc = await getDoc(userDocRef);
+      try {
+        // Check if user document exists
+        const userDocRef = doc(db, "Users", user.uid);
+        const userDoc = await getDoc(userDocRef);
 
-      if (!userDoc.exists()) {
-        // If user doesn't exist, create new document
-        await setDoc(userDocRef, {
-          email: user.email,
-          firstName: user.displayName?.split(" ")[0] || "",
-          lastName: user.displayName?.split(" ").slice(1).join(" ") || "",
-          photo: user.photoURL || "",
-          createdAt: new Date().toISOString(),
+        if (!userDoc.exists()) {
+          // If user doesn't exist, create new document
+          await setDoc(userDocRef, {
+            email: user.email,
+            firstName: user.displayName?.split(" ")[0] || "",
+            lastName: user.displayName?.split(" ").slice(1).join(" ") || "",
+            photo: user.photoURL || "",
+            createdAt: new Date().toISOString(),
+          });
+        }
+
+        // Navigate to dashboard after successful sign-in
+        setSnackbar({
+          open: true,
+          message: "Successfully signed in!",
+          severity: "success",
+        });
+
+        setTimeout(() => {
+          setShowLoading(false);
+          navigate("/dashboard");
+        }, 3000);
+      } catch (firestoreError) {
+        console.error("Firestore error:", firestoreError);
+        setShowLoading(false);
+        setSnackbar({
+          open: true,
+          message: "Error accessing database. Please try again.",
+          severity: "error",
         });
       }
-
-      // Navigate to dashboard after successful sign-in
-      setTimeout(() => {
-        setShowLoading(false);
-        navigate("/dashboard");
-      }, 3000);
-    } catch (error) {
+    } catch (authError) {
+      console.error("Authentication error:", authError);
       setShowLoading(false);
-      console.error("Error signing in with Google:", error);
-      // You might want to show an error message to the user here
+      setSnackbar({
+        open: true,
+        message: "Error signing in with Google. Please try again.",
+        severity: "error",
+      });
     }
   };
 

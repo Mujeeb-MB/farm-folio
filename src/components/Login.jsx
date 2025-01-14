@@ -217,7 +217,6 @@ export default function Login() {
                 ),
               }}
             />
-
             <Button
               type="submit"
               variant="contained"
@@ -235,9 +234,11 @@ export default function Login() {
             >
               Login
             </Button>
-
             {/* Google Sign-In Button */}
-            <SigninWithGoogle setShowLoading={setShowLoading} />
+            <SigninWithGoogle
+              setShowLoading={setShowLoading}
+              setSnackbar={setSnackbar}
+            />
           </Box>
 
           {/* Divider and Sign-up Link */}
