@@ -5,9 +5,11 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth, db } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc, getDoc } from "firebase/firestore";
+import { useTranslation } from "react-i18next";
 
 export default function SigninWithGoogle({ setShowLoading, setSnackbar }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleGoogleSignIn = async () => {
     setShowLoading(true);
@@ -84,7 +86,7 @@ export default function SigninWithGoogle({ setShowLoading, setSnackbar }) {
       }}
       aria-label="Sign in with Google"
     >
-      Continue with Google
+      {t("signup.google")}
     </Button>
   );
 }

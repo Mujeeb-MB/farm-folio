@@ -1,7 +1,9 @@
 import React from "react";
 import { Box, Typography, Grid, Link, Container } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <Box sx={{ py: 6, backgroundColor: "#333", color: "#fff" }}>
       <Container maxWidth="lg">
@@ -9,31 +11,30 @@ export default function Footer() {
           {/* About Section */}
           <Grid item xs={12} md={4}>
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
-              About FarmerFolio
+              {t("footer.aboutUs")}
             </Typography>
             <Typography variant="body2" sx={{ color: "#bbb" }}>
-              FarmerFolio is dedicated to helping farmers manage their expenses
-              and optimize resources to grow smarter.
+              {t("footer.aboutUsDesc")}
             </Typography>
           </Grid>
 
           {/* Links Section */}
           <Grid item xs={12} md={4}>
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
-              Quick Links
+              {t("footer.quickLinks")}
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
               <Link href="#" color="inherit" underline="none">
-                Features
+                {t("footer.features")}
               </Link>
               <Link href="#" color="inherit" underline="none">
-                Pricing
+                {t("footer.pricing")}
               </Link>
               <Link href="#" color="inherit" underline="none">
-                Contact Us
+                {t("footer.contact")}
               </Link>
               <Link href="#" color="inherit" underline="none">
-                FAQs
+                {t("footer.faq")}
               </Link>
             </Box>
           </Grid>
@@ -41,13 +42,13 @@ export default function Footer() {
           {/* Contact Section */}
           <Grid item xs={12} md={4}>
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
-              Get in Touch
+              {t("footer.getInTouch")}
             </Typography>
             <Typography variant="body2" sx={{ color: "#bbb" }}>
-              Email: support@farmerfolio.com
+              {t("footer.email")}: support@farmerfolio.in
             </Typography>
             <Typography variant="body2" sx={{ color: "#bbb" }}>
-              Phone: +1 (123) 456-7890
+              {t("footer.phone")}: +91 9010 320 330
             </Typography>
           </Grid>
         </Grid>
@@ -55,7 +56,7 @@ export default function Footer() {
         {/* Bottom Footer */}
         <Box sx={{ textAlign: "center", mt: 6 }}>
           <Typography variant="body2" sx={{ color: "#bbb" }}>
-            © {new Date().getFullYear()} FarmerFolio. All rights reserved.
+            © {new Date().getFullYear()} FarmerFolio. {t("footer.rights")}
           </Typography>
         </Box>
       </Container>

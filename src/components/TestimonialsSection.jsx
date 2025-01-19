@@ -3,6 +3,7 @@ import { Box, Typography, Grid, Avatar, Container } from "@mui/material";
 import TestFarm1 from "../assets/TestFarm1.jpg";
 import TestFarm2 from "../assets/TestFarm2.jpg";
 import TestFarm3 from "../assets/TestFarm3.jpg";
+import { useTranslation } from "react-i18next";
 
 const testimonials = [
   {
@@ -23,11 +24,31 @@ const testimonials = [
 ];
 
 export default function TestimonialsSection() {
+  const { t } = useTranslation();
+
+  const testimonials = [
+    {
+      name: `${t("testimonials.name1")}`,
+      image: TestFarm1,
+      quote: `${t("testimonials.review1")}`,
+    },
+    {
+      name: `${t("testimonials.name2")}`,
+      image: TestFarm2,
+      quote: `${t("testimonials.review2")}`,
+    },
+    {
+      name: `${t("testimonials.name3")}`,
+      image: TestFarm3,
+      quote: `${t("testimonials.review3")}`,
+    },
+  ];
+
   return (
     <Box sx={{ py: 8 }}>
       <Container maxWidth="lg">
         <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 6 }}>
-          What Our Users Say
+          {t("testimonials.heading")}
         </Typography>
         <Grid container spacing={4} justifyContent="center">
           {testimonials.map((testimonial, index) => (

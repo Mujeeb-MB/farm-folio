@@ -1,9 +1,11 @@
 import React from "react";
 import { Box, Typography, Button, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function CTASection() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -16,10 +18,10 @@ export default function CTASection() {
     >
       <Container maxWidth="md">
         <Typography variant="h4" sx={{ fontWeight: 600 }}>
-          Ready to streamline your farm management?
+          {t("ctasection.title")}
         </Typography>
         <Typography variant="h6" sx={{ mt: 2, mb: 4 }}>
-          Join FarmerFolio today and take control of your farm's finances.
+          {t("ctasection.subtitle")}
         </Typography>
         <Button
           variant="contained"
@@ -31,7 +33,7 @@ export default function CTASection() {
           }}
           onClick={() => navigate("/signup")}
         >
-          Get Started
+          {t("ctasection.cta")}
         </Button>
       </Container>
     </Box>

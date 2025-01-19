@@ -21,6 +21,7 @@ import MuiAlert from "@mui/material/Alert";
 import SigninWithGoogle from "./SigninWithGoogle";
 
 import LoadingAnimation from "./common/LoadingAnimation";
+import { useTranslation } from "react-i18next";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -28,6 +29,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [showLoading, setShowLoading] = useState(false);
 
@@ -199,14 +201,14 @@ export default function SignUp() {
             gutterBottom
             sx={{ fontWeight: 600, textAlign: "center" }}
           >
-            Join FarmFolio
+            {t("signup.heading")}
           </Typography>
           <Typography
             variant="subtitle2"
             gutterBottom
             sx={{ color: "text.secondary", mb: 3, textAlign: "center" }}
           >
-            Empower your farming journey with ease.
+            {t("signup.subheading")}
           </Typography>
 
           {/* Sign-Up Form */}
@@ -222,7 +224,7 @@ export default function SignUp() {
           >
             {/* First Name Field */}
             <TextField
-              label="First Name"
+              label={t("signup.firstName")}
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
@@ -236,7 +238,7 @@ export default function SignUp() {
             />
             {/* Last Name Field */}
             <TextField
-              label="Last Name"
+              label={t("signup.lastName")}
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
@@ -250,7 +252,7 @@ export default function SignUp() {
             />
             {/* Email Field */}
             <TextField
-              label="Email"
+              label={t("signup.email")}
               name="email"
               value={formData.email}
               onChange={handleChange}
@@ -264,7 +266,7 @@ export default function SignUp() {
             />
             {/* Password Field */}
             <TextField
-              label="Password"
+              label={t("signup.password")}
               name="password"
               value={formData.password}
               onChange={handleChange}
@@ -290,7 +292,7 @@ export default function SignUp() {
             />
             {/* Confirm Password Field */}
             <TextField
-              label="Confirm Password"
+              label={t("signup.confirmPassword")}
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
@@ -330,7 +332,7 @@ export default function SignUp() {
               }}
               aria-label="Sign Up"
             >
-              Sign Up
+              {t("signup.signup")}
             </Button>
             {/* Google Sign-In Button */}
             <SigninWithGoogle
@@ -342,14 +344,14 @@ export default function SignUp() {
           {/* Divider and Login Link */}
           <Divider sx={{ my: 4, width: "100%", maxWidth: 400 }} />
           <Typography variant="body2" align="center">
-            Already have an account?{" "}
+            {t("signup.haveAccount")}{" "}
             <Link to="/login" style={{ textDecoration: "none" }}>
               <Typography
                 component="span"
                 color="primary.main"
                 sx={{ fontWeight: 500 }}
               >
-                Sign in
+                {t("signup.signIn")}
               </Typography>
             </Link>
           </Typography>

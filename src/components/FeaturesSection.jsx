@@ -15,6 +15,7 @@ import {
   Inventory,
   DateRange,
 } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 const features = [
   {
@@ -68,11 +69,34 @@ const IconWrapper = styled("div")(({ theme }) => ({
 }));
 
 export default function FeaturesSection() {
+  const { t } = useTranslation();
+  const features = [
+    {
+      title: `${t("features.title1")}`,
+      description: `${t("features.description1")}`,
+      icon: <MonetizationOn sx={{ fontSize: 40 }} />,
+    },
+    {
+      title: `${t("features.title2")}`,
+      description: `${t("features.description2")}`,
+      icon: <Assessment sx={{ fontSize: 40 }} />,
+    },
+    {
+      title: `${t("features.title3")}`,
+      description: `${t("features.description3")}`,
+      icon: <Inventory sx={{ fontSize: 40 }} />,
+    },
+    {
+      title: `${t("features.title4")}`,
+      description: `${t("features.description4")}`,
+      icon: <DateRange sx={{ fontSize: 40 }} />,
+    },
+  ];
   return (
-    <Box sx={{ py: 8, backgroundColor: "#f9f9f9" }}>
+    <Box sx={{ py: 8, backgroundColor: "background.default" }}>
       <Container maxWidth="lg">
         <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 6 }}>
-          Key Features
+          {t("features.heading")}
         </Typography>
         <Grid container spacing={4}>
           {features.map((feature, index) => (

@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/system";
 import heroImage from "../assets/cover1.png"; // Replace with your image path
 
+import { useTranslation } from "react-i18next";
+
 // Keyframe animations
 const fadeInUp = keyframes`
   from {
@@ -26,6 +28,7 @@ const AnimatedTypography = styled(Typography)(({ delay = "0s" }) => ({
 
 export default function HeroSection() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -64,13 +67,13 @@ export default function HeroSection() {
           }}
           delay="0.2s"
         >
-          Welcome to{" "}
+          {t("hero.welcome")}{" "}
           <span
             style={{
               color: "#40bf79", // Highlighted color
             }}
           >
-            FarmFolio.
+            {t("hero.title")}
           </span>
         </AnimatedTypography>
 
@@ -86,9 +89,7 @@ export default function HeroSection() {
           }}
           delay="0.4s"
         >
-          Empowering farmers to track expenses, optimize resources, and grow
-          smarter. FarmFolio is your one-stop solution for managing every detail
-          of your farm with ease.
+          {t("hero.para")}
         </AnimatedTypography>
 
         {/* Call-to-Action Button */}
@@ -111,7 +112,7 @@ export default function HeroSection() {
           }}
           onClick={() => navigate("/signup")}
         >
-          Get Started
+          {t("hero.cta")}
         </Button>
       </Container>
     </Box>

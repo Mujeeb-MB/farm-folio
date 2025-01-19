@@ -269,7 +269,7 @@ export default function MonthlyTrends({ expenses }) {
             <Box
               sx={{
                 p: 2,
-                bgcolor: "secondary.main",
+                bgcolor: "secondary.optional",
                 color: "white",
                 borderRadius: 1,
               }}

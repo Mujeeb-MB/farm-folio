@@ -10,17 +10,22 @@ import {
   MenuItem,
   ListItemIcon,
   Divider,
+  Tooltip,
+  IconButton,
 } from "@mui/material";
 import {
   Person,
   Settings,
   Security,
   Logout as LogoutIcon,
+  Brightness7,
+  Brightness4,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
+import { useTheme } from "../context/ThemeContext";
 
 const drawerWidth = 240;
 
@@ -28,6 +33,8 @@ export default function Navbar({ open }) {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const { darkMode, toggleTheme } = useTheme();
 
   const handleProfileClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -60,6 +67,11 @@ export default function Navbar({ open }) {
     >
       <Toolbar>
         <Box sx={{ flexGrow: 1 }} />
+        <Tooltip title={darkMode ? "Light Mode" : "Dark Mode"}>
+          <IconButton onClick={toggleTheme} color="inherit">
+            {darkMode ? <Brightness7 /> : <Brightness4 />}
+          </IconButton>
+        </Tooltip>
         <Box
           sx={{
             display: "flex",

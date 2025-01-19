@@ -6,7 +6,6 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DashboardLayout from "./components/DashboardLayout";
@@ -22,19 +21,13 @@ import Settings from "./pages/Settings";
 import Privacy from "./pages/Privacy";
 import FarmAI from "./pages/FarmAI";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#339961",
-    },
-    secondary: {
-      main: "#000000",
-    },
-  },
-  typography: {
-    fontFamily: "Poppins, Roboto, Arial, sans-serif",
-  },
-});
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "./context/ThemeContext";
+import { getTheme } from "./theme/theme";
+import { useTheme } from "./context/ThemeContext";
+import { CssBaseline } from "@mui/material";
+
+import "./i18n";
 
 const DynamicTitle = () => {
   const location = useLocation();
@@ -61,11 +54,15 @@ const DynamicTitle = () => {
   return null;
 };
 
-function App() {
+function ThemedApp() {
+  const { darkMode } = useTheme();
+  const theme = getTheme(darkMode);
+
   return (
-    <ThemeProvider theme={theme}>
-      <AuthProvider>
-        <Router>
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <AuthProvider>
           <DynamicTitle />
 
           <Routes>
@@ -156,8 +153,16 @@ function App() {
               }
             />
           </Routes>
-        </Router>
-      </AuthProvider>
+        </AuthProvider>
+      </Router>
+    </MuiThemeProvider>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <ThemedApp />
     </ThemeProvider>
   );
 }

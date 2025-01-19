@@ -20,6 +20,7 @@ import MuiAlert from "@mui/material/Alert";
 import SigninWithGoogle from "./SigninWithGoogle";
 
 import LoadingAnimation from "./common/LoadingAnimation";
+import { useTranslation } from "react-i18next";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -27,6 +28,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function Login() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   // State for form values and errors
   const [formValues, setFormValues] = useState({
@@ -157,14 +159,14 @@ export default function Login() {
             color="primary"
             sx={{ fontWeight: 600, textAlign: "center" }}
           >
-            Welcome Back
+            {t("login.welcomeBack")}
           </Typography>
           <Typography
             variant="subtitle2"
             gutterBottom
             sx={{ color: "text.secondary", textAlign: "center", mb: 3 }}
           >
-            Track your farms effortlessly with FarmFolio.
+            {t("login.subheading")}
           </Typography>
 
           {/* Login Form */}
@@ -179,7 +181,7 @@ export default function Login() {
             noValidate
           >
             <TextField
-              label="Email"
+              label={t("login.email")}
               name="email"
               type="email"
               fullWidth
@@ -193,7 +195,7 @@ export default function Login() {
               }}
             />
             <TextField
-              label="Password"
+              label={t("login.password")}
               name="password"
               type={showPassword ? "text" : "password"}
               fullWidth
@@ -232,7 +234,7 @@ export default function Login() {
               }}
               aria-label="Login"
             >
-              Login
+              {t("login.login")}
             </Button>
             {/* Google Sign-In Button */}
             <SigninWithGoogle
@@ -244,14 +246,14 @@ export default function Login() {
           {/* Divider and Sign-up Link */}
           <Divider sx={{ my: 4, width: "100%", maxWidth: 400 }} />
           <Typography variant="body2" sx={{ textAlign: "center" }}>
-            Don't have an account?{" "}
+            {t("login.dontHaveAccount")}{" "}
             <Link to="/signup" style={{ textDecoration: "none" }}>
               <Typography
                 component="span"
                 color="primary.main"
                 sx={{ fontWeight: 500 }}
               >
-                Sign up now
+                {t("login.signUp")}
               </Typography>
             </Link>
           </Typography>
