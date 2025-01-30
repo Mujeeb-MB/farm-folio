@@ -18,14 +18,17 @@ import {
   Settings,
   Security,
   Logout as LogoutIcon,
-  Brightness7,
-  Brightness4,
 } from "@mui/icons-material";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { useTheme } from "../context/ThemeContext";
+
+import LanguageSwitcher from "./common/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 const drawerWidth = 240;
 
@@ -33,6 +36,8 @@ export default function Navbar({ open }) {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const { t } = useTranslation();
 
   const { darkMode, toggleTheme } = useTheme();
 
@@ -67,9 +72,10 @@ export default function Navbar({ open }) {
     >
       <Toolbar>
         <Box sx={{ flexGrow: 1 }} />
+        <LanguageSwitcher />
         <Tooltip title={darkMode ? "Light Mode" : "Dark Mode"}>
           <IconButton onClick={toggleTheme} color="inherit">
-            {darkMode ? <Brightness7 /> : <Brightness4 />}
+            {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
           </IconButton>
         </Tooltip>
         <Box
@@ -119,7 +125,7 @@ export default function Navbar({ open }) {
             <ListItemIcon>
               <Person fontSize="small" />
             </ListItemIcon>
-            Profile
+            {t("nav.profile")}
           </MenuItem>
           <MenuItem
             onClick={() => {
@@ -130,7 +136,7 @@ export default function Navbar({ open }) {
             <ListItemIcon>
               <Settings fontSize="small" />
             </ListItemIcon>
-            Settings
+            {t("nav.settings")}
           </MenuItem>
           <MenuItem
             onClick={() => {
@@ -141,14 +147,14 @@ export default function Navbar({ open }) {
             <ListItemIcon>
               <Security fontSize="small" />
             </ListItemIcon>
-            Privacy Policy
+            {t("nav.privacy")}
           </MenuItem>
           <Divider />
           <MenuItem onClick={handleSignOut}>
             <ListItemIcon>
               <LogoutIcon fontSize="small" />
             </ListItemIcon>
-            Sign Out
+            {t("nav.signout")}
           </MenuItem>
         </Menu>
       </Toolbar>

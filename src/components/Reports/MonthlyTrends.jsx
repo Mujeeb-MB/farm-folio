@@ -22,8 +22,11 @@ import {
   LineChart,
   Line,
 } from "recharts";
+import { useTranslation } from "react-i18next";
 
 export default function MonthlyTrends({ expenses }) {
+  const { t } = useTranslation();
+
   const [viewType, setViewType] = React.useState("area"); // 'area' or 'line'
   const [timeFrame, setTimeFrame] = React.useState("6"); // months to show
 
@@ -101,15 +104,15 @@ export default function MonthlyTrends({ expenses }) {
         >
           <Typography variant="subtitle2">{label}</Typography>
           <Typography variant="body2" color="text.secondary">
-            Total: {formatCurrency(payload[0].value)}
+            {t("reports.total")}: {formatCurrency(payload[0].value)}
           </Typography>
           {payload[1] && (
             <Typography variant="body2" color="text.secondary">
-              Avg/Expense: {formatCurrency(payload[1].value)}
+              {t("reports.average")}: {formatCurrency(payload[1].value)}
             </Typography>
           )}
           <Typography variant="body2" color="text.secondary">
-            Count: {payload[0].payload.count} expenses
+            {t("reports.count")}: {payload[0].payload.count} expenses
           </Typography>
         </Box>
       );
@@ -121,29 +124,29 @@ export default function MonthlyTrends({ expenses }) {
     <Card>
       <CardContent>
         <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
-          <Typography variant="h6">Monthly Trends</Typography>
+          <Typography variant="h6">{t("reports.monthlyTrends")}</Typography>
           <Box sx={{ display: "flex", gap: 2 }}>
             <FormControl size="small" sx={{ minWidth: 120 }}>
-              <InputLabel>View Type</InputLabel>
+              <InputLabel>{t("reports.viewType")}</InputLabel>
               <Select
                 value={viewType}
-                label="View Type"
+                label={t("reports.viewType")}
                 onChange={(e) => setViewType(e.target.value)}
               >
-                <MenuItem value="area">Area Chart</MenuItem>
-                <MenuItem value="line">Line Chart</MenuItem>
+                <MenuItem value="area">{t("reports.areaChart")}</MenuItem>
+                <MenuItem value="line">{t("reports.lineChart")}</MenuItem>
               </Select>
             </FormControl>
             <FormControl size="small" sx={{ minWidth: 120 }}>
-              <InputLabel>Time Frame</InputLabel>
+              <InputLabel>{t("reports.timeFrame")}</InputLabel>
               <Select
                 value={timeFrame}
-                label="Time Frame"
+                label={t("reports.timeFrame")}
                 onChange={(e) => setTimeFrame(e.target.value)}
               >
-                <MenuItem value="3">3 Months</MenuItem>
-                <MenuItem value="6">6 Months</MenuItem>
-                <MenuItem value="12">12 Months</MenuItem>
+                <MenuItem value="3">3 {t("reports.months")}</MenuItem>
+                <MenuItem value="6">6 {t("reports.months")}</MenuItem>
+                <MenuItem value="12">12 {t("reports.months")}</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -255,7 +258,7 @@ export default function MonthlyTrends({ expenses }) {
               }}
             >
               <Typography variant="subtitle2">
-                Average Monthly Expense
+                {t("reports.averagMonthlyExp")}
               </Typography>
               <Typography variant="h6">
                 {formatCurrency(
@@ -275,7 +278,7 @@ export default function MonthlyTrends({ expenses }) {
               }}
             >
               <Typography variant="subtitle2">
-                Highest Monthly Expense
+                {t("reports.highestMonthlyExp")}
               </Typography>
               <Typography variant="h6">
                 {formatCurrency(
@@ -294,7 +297,7 @@ export default function MonthlyTrends({ expenses }) {
               }}
             >
               <Typography variant="subtitle2">
-                Total Expenses (Period)
+                {t("reports.totalMonthlyExp")}
               </Typography>
               <Typography variant="h6">
                 {formatCurrency(

@@ -10,8 +10,10 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { useTranslation } from "react-i18next";
 
 export default function ExpenseOverview({ expenses }) {
+  const { t } = useTranslation();
   const chartData = useMemo(() => {
     const monthlyData = expenses.reduce((acc, expense) => {
       const date = expense.date.toDate();
@@ -54,7 +56,7 @@ export default function ExpenseOverview({ expenses }) {
     <Card>
       <CardContent>
         <Typography variant="h6" gutterBottom>
-          Expense Overview
+          {t("dashboard.expenseOverview.title")}
         </Typography>
 
         <Box sx={{ width: "100%", height: 300 }}>
@@ -74,12 +76,19 @@ export default function ExpenseOverview({ expenses }) {
               />
               <Tooltip
                 formatter={(value) => formatCurrency(value)}
-                labelFormatter={(label) => `Month: ${label}`}
+                labelFormatter={(label) =>
+                  `${t("dashboard.expenseOverview.month")} ${label}`
+                }
               />
-              <Bar dataKey="paid" name="Paid" fill="#2e7d32" stackId="a" />
+              <Bar
+                dataKey="paid"
+                name={t("dashboard.expenseOverview.paid")}
+                fill="#2e7d32"
+                stackId="a"
+              />
               <Bar
                 dataKey="pending"
-                name="Pending"
+                name={t("dashboard.expenseOverview.pending")}
                 fill="#DC143C"
                 stackId="a"
               />

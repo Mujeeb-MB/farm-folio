@@ -12,13 +12,21 @@ import {
   Grid,
 } from "@mui/material";
 import { Clear as ClearIcon } from "@mui/icons-material";
-import { expenseCategories, paymentStatuses } from "../../constants/expenses";
+import { useTranslation } from "react-i18next";
+import {
+  useExpenseCategories,
+  usePaymentStatuses,
+} from "../../constants/expenses";
 
 export default function ExpenseFilterBar({
   filters,
   onFilterChange,
   onClearFilters,
 }) {
+  const { t } = useTranslation();
+  const expenseCategories = useExpenseCategories();
+  const paymentStatuses = usePaymentStatuses();
+
   const handleChange = (name, value) => {
     onFilterChange({ ...filters, [name]: value });
   };
@@ -30,7 +38,7 @@ export default function ExpenseFilterBar({
           <TextField
             fullWidth
             type="date"
-            label="From Date"
+            label={t("expense.expenseFilter.fromDate")}
             value={filters.fromDate || ""}
             onChange={(e) => handleChange("fromDate", e.target.value)}
             InputLabelProps={{ shrink: true }}
@@ -41,7 +49,7 @@ export default function ExpenseFilterBar({
           <TextField
             fullWidth
             type="date"
-            label="To Date"
+            label={t("expense.expenseFilter.toDate")}
             value={filters.toDate || ""}
             onChange={(e) => handleChange("toDate", e.target.value)}
             InputLabelProps={{ shrink: true }}
@@ -50,13 +58,15 @@ export default function ExpenseFilterBar({
 
         <Grid item xs={12} sm={6} md={2}>
           <FormControl fullWidth>
-            <InputLabel>Category</InputLabel>
+            <InputLabel>{t("expense.expenseFilter.category")}</InputLabel>
             <Select
               value={filters.category || ""}
               onChange={(e) => handleChange("category", e.target.value)}
-              label="Category"
+              label={t("expense.expenseFilter.category")}
             >
-              <MenuItem value="">All Categories</MenuItem>
+              <MenuItem value="">
+                {t("expense.expenseFilter.allCategories")}
+              </MenuItem>
               {Object.keys(expenseCategories).map((category) => (
                 <MenuItem key={category} value={category}>
                   {category}
@@ -68,13 +78,15 @@ export default function ExpenseFilterBar({
 
         <Grid item xs={12} sm={6} md={2}>
           <FormControl fullWidth>
-            <InputLabel>Payment Status</InputLabel>
+            <InputLabel>{t("expense.paymentStatus")}</InputLabel>
             <Select
               value={filters.paymentStatus || ""}
               onChange={(e) => handleChange("paymentStatus", e.target.value)}
-              label="Payment Status"
+              label={t("expense.paymentStatus")}
             >
-              <MenuItem value="">All Statuses</MenuItem>
+              <MenuItem value="">
+                {t("expense.expenseFilter.allStatus")}
+              </MenuItem>
               {paymentStatuses.map((status) => (
                 <MenuItem key={status} value={status}>
                   {status}
@@ -86,21 +98,27 @@ export default function ExpenseFilterBar({
 
         <Grid item xs={12} sm={6} md={1}>
           <FormControl fullWidth>
-            <InputLabel>Sort By</InputLabel>
+            <InputLabel>{t("expense.expenseFilter.sortBy")}</InputLabel>
             <Select
               value={filters.sortBy || "date"}
               onChange={(e) => handleChange("sortBy", e.target.value)}
-              label="Sort By"
+              label={t("expense.expenseFilter.sortBy")}
             >
-              <MenuItem value="date">Date</MenuItem>
-              <MenuItem value="amount">Amount</MenuItem>
-              <MenuItem value="category">Category</MenuItem>
+              <MenuItem value="date">
+                {t("expense.expenseFilter.date")}
+              </MenuItem>
+              <MenuItem value="amount">
+                {t("expense.expenseFilter.amount")}
+              </MenuItem>
+              <MenuItem value="category">
+                {t("expense.expenseFilter.category")}
+              </MenuItem>
             </Select>
           </FormControl>
         </Grid>
 
         <Grid item xs={12} sm={6} md={1}>
-          <Tooltip title="Clear Filters">
+          <Tooltip title={t("expense.expenseFilter.clearFilters")}>
             <IconButton onClick={onClearFilters}>
               <ClearIcon />
             </IconButton>

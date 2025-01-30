@@ -27,6 +27,7 @@ import {
   YAxis,
   CartesianGrid,
 } from "recharts";
+import { useTranslation } from "react-i18next";
 
 // Colors for different payment statuses
 const STATUS_COLORS = {
@@ -43,6 +44,7 @@ const MODE_COLORS = {
 };
 
 export default function PaymentAnalysis({ expenses }) {
+  const { t } = useTranslation();
   const analysisData = useMemo(() => {
     // Initialize data structures
     const statusData = {};
@@ -132,13 +134,13 @@ export default function PaymentAnalysis({ expenses }) {
         >
           <Typography variant="subtitle2">{data.name}</Typography>
           <Typography variant="body2" color="text.secondary">
-            Amount: {formatCurrency(data.value)}
+            {t("reports.amount")}: {formatCurrency(data.value)}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Percentage: {data.percentage}%
+            {t("reports.percentage")}: {data.percentage}%
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Count: {data.count} transactions
+            {t("reports.count")}: {data.count} transactions
           </Typography>
         </Box>
       );
@@ -150,14 +152,14 @@ export default function PaymentAnalysis({ expenses }) {
     <Card>
       <CardContent>
         <Typography variant="h6" gutterBottom>
-          Payment Analysis
+          {t("reports.paymentAnalysis")}
         </Typography>
 
         <Grid container spacing={3}>
           {/* Payment Status Chart */}
           <Grid item xs={12} md={6}>
             <Typography variant="subtitle1" gutterBottom>
-              Payment Status Distribution
+              {t("reports.paymentStatus")}
             </Typography>
             <Box sx={{ height: 300 }}>
               <ResponsiveContainer>
@@ -185,7 +187,7 @@ export default function PaymentAnalysis({ expenses }) {
           {/* Payment Mode Chart */}
           <Grid item xs={12} md={6}>
             <Typography variant="subtitle1" gutterBottom>
-              Payment Mode Distribution
+              {t("reports.paymentMode")}
             </Typography>
             <Box sx={{ height: 300 }}>
               <ResponsiveContainer>
@@ -213,7 +215,7 @@ export default function PaymentAnalysis({ expenses }) {
           {/* Monthly Payment Status Trend */}
           <Grid item xs={12}>
             <Typography variant="subtitle1" gutterBottom>
-              Monthly Payment Status Trend
+              {t("reports.monthlyStatusTrends")}
             </Typography>
             <Box sx={{ height: 300 }}>
               <ResponsiveContainer>
@@ -258,10 +260,12 @@ export default function PaymentAnalysis({ expenses }) {
               <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Payment Type</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Percentage</TableCell>
-                    <TableCell align="right">Count</TableCell>
+                    <TableCell>{t("reports.paymentType")}</TableCell>
+                    <TableCell align="right">{t("reports.amount")}</TableCell>
+                    <TableCell align="right">
+                      {t("reports.percentage")}
+                    </TableCell>
+                    <TableCell align="right">{t("reports.count")}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

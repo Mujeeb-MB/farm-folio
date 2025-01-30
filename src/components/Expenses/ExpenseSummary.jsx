@@ -13,8 +13,10 @@ import {
   PendingOutlined,
   CategoryOutlined,
 } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 export default function ExpenseSummary({ expenses }) {
+  const { t } = useTranslation();
   const summary = useMemo(() => {
     return expenses.reduce(
       (acc, expense) => {
@@ -63,7 +65,7 @@ export default function ExpenseSummary({ expenses }) {
               <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
                 <CategoryOutlined color="primary" sx={{ mr: 1 }} />
                 <Typography variant="h6" component="div">
-                  Total Expenses
+                  {t("expense.expenseSummary.totalExpenses")}
                 </Typography>
               </Box>
               <Typography variant="h4" color="primary">
@@ -80,7 +82,7 @@ export default function ExpenseSummary({ expenses }) {
               <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
                 <PaidOutlined color="success" sx={{ mr: 1 }} />
                 <Typography variant="h6" component="div">
-                  Paid Amount
+                  {t("expense.expenseSummary.paidAmount")}
                 </Typography>
               </Box>
               <Typography variant="h4" color="success.main">
@@ -97,7 +99,7 @@ export default function ExpenseSummary({ expenses }) {
               <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
                 <PendingOutlined color="warning" sx={{ mr: 1 }} />
                 <Typography variant="h6" component="div">
-                  Pending Amount
+                  {t("expense.expenseSummary.pendingAmount")}
                 </Typography>
               </Box>
               <Typography variant="h4" color="warning.main">
@@ -112,7 +114,7 @@ export default function ExpenseSummary({ expenses }) {
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>
-                Category-wise Expenses
+                {t("expense.expenseSummary.categoryExpense")}
               </Typography>
               <Divider sx={{ my: 2 }} />
               <Grid container spacing={2}>

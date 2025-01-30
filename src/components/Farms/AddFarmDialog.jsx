@@ -1,5 +1,5 @@
 // src/components/Farms/AddFarmDialog.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -18,30 +18,61 @@ import {
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../firebase/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { crops } from "../../constants/crops";
-
-const seasons = ["Kharif", "Rabi", "Zaid"];
-const stages = ["Land Preparation", "Sowing", "Growing", "Harvesting"];
-const areaUnits = ["Acres", "Guntas"];
+import { CropsComponent } from "../../constants/crops";
+import { useTranslation } from "react-i18next";
 
 export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
+  const { t, i18n } = useTranslation();
   const { currentUser } = useAuth();
+  const crops = CropsComponent();
+
+  // Constants with translations
+  const seasons = [
+    t("farmManagement.kharif"),
+    t("farmManagement.rabi"),
+    t("farmManagement.zaid"),
+  ];
+
+  const stages = [
+    t("farmManagement.landPreparation"),
+    t("farmManagement.sowing"),
+    t("farmManagement.growing"),
+    t("farmManagement.harvesting"),
+  ];
+
+  const areaUnits = [t("farmManagement.acres"), t("farmManagement.guntas")];
+
+  // States
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-
   const [formData, setFormData] = useState({
     farmName: "",
     village: "",
     mandal: "",
     district: "",
     totalArea: "",
-    areaUnit: "Acres",
+    areaUnit: t("farmManagement.acres"),
     cropCategory: "",
     cropType: "",
     season: "",
     currentStage: "",
   });
+
+  // Update form values when language changes
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      areaUnit: t("farmManagement.acres"),
+    }));
+  }, [i18n.language, t]);
+
+  // Convert translated value to standard value for storage
+  const getStandardAreaUnit = (translatedUnit) => {
+    if (translatedUnit === t("farmManagement.acres")) return "acres";
+    if (translatedUnit === t("farmManagement.guntas")) return "guntas";
+    return translatedUnit;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -60,6 +91,7 @@ export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
     try {
       const farmData = {
         ...formData,
+        areaUnit: getStandardAreaUnit(formData.areaUnit),
         totalArea: Number(formData.totalArea),
         status: "Active",
         createdAt: serverTimestamp(),
@@ -74,7 +106,7 @@ export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
       handleClose();
     } catch (error) {
       console.error("Error adding farm:", error);
-      setError("Failed to add farm. Please try again.");
+      setError(t("farmManagement.addFarmError"));
     } finally {
       setLoading(false);
     }
@@ -87,7 +119,7 @@ export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
       mandal: "",
       district: "",
       totalArea: "",
-      areaUnit: "Acres",
+      areaUnit: t("farmManagement.acres"),
       cropCategory: "",
       cropType: "",
       season: "",
@@ -108,14 +140,14 @@ export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
           sx: { borderRadius: 2 },
         }}
       >
-        <DialogTitle>Add New Farm</DialogTitle>
+        <DialogTitle>{t("farmManagement.addNewFarm")}</DialogTitle>
         <form onSubmit={handleSubmit}>
           <DialogContent>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   name="farmName"
-                  label="Farm Name"
+                  label={t("farmManagement.farmName")}
                   fullWidth
                   required
                   value={formData.farmName}
@@ -126,7 +158,7 @@ export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
               <Grid item xs={12} sm={4}>
                 <TextField
                   name="village"
-                  label="Village"
+                  label={t("farmManagement.village")}
                   fullWidth
                   required
                   value={formData.village}
@@ -137,7 +169,7 @@ export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
               <Grid item xs={12} sm={4}>
                 <TextField
                   name="mandal"
-                  label="Mandal"
+                  label={t("farmManagement.mandal")}
                   fullWidth
                   required
                   value={formData.mandal}
@@ -148,7 +180,7 @@ export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
               <Grid item xs={12} sm={4}>
                 <TextField
                   name="district"
-                  label="District"
+                  label={t("farmManagement.district")}
                   fullWidth
                   required
                   value={formData.district}
@@ -159,7 +191,7 @@ export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
               <Grid item xs={12} sm={6}>
                 <TextField
                   name="totalArea"
-                  label="Total Area"
+                  label={t("farmManagement.totalArea")}
                   type="number"
                   fullWidth
                   required
@@ -171,12 +203,12 @@ export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
 
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth required>
-                  <InputLabel>Area Unit</InputLabel>
+                  <InputLabel>{t("farmManagement.areaUnit")}</InputLabel>
                   <Select
                     name="areaUnit"
                     value={formData.areaUnit}
                     onChange={handleChange}
-                    label="Area Unit"
+                    label={t("farmManagement.areaUnit")}
                   >
                     {areaUnits.map((unit) => (
                       <MenuItem key={unit} value={unit}>
@@ -189,16 +221,16 @@ export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
 
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth required>
-                  <InputLabel>Crop Category</InputLabel>
+                  <InputLabel>{t("farmManagement.cropCategory")}</InputLabel>
                   <Select
                     name="cropCategory"
                     value={formData.cropCategory}
                     onChange={handleChange}
-                    label="Crop Category"
+                    label={t("farmManagement.cropCategory")}
                   >
                     {Object.keys(crops).map((category) => (
                       <MenuItem key={category} value={category}>
-                        {category}
+                        {t(`${category}`)}
                       </MenuItem>
                     ))}
                   </Select>
@@ -211,17 +243,17 @@ export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
                   required
                   disabled={!formData.cropCategory}
                 >
-                  <InputLabel>Crop Type</InputLabel>
+                  <InputLabel>{t("farmManagement.cropType")}</InputLabel>
                   <Select
                     name="cropType"
                     value={formData.cropType}
                     onChange={handleChange}
-                    label="Crop Type"
+                    label={t("farmManagement.cropType")}
                   >
                     {formData.cropCategory &&
                       crops[formData.cropCategory].map((crop) => (
                         <MenuItem key={crop} value={crop}>
-                          {crop}
+                          {t(`${crop}`)}
                         </MenuItem>
                       ))}
                   </Select>
@@ -230,12 +262,12 @@ export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
 
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth required>
-                  <InputLabel>Season</InputLabel>
+                  <InputLabel>{t("farmManagement.season")}</InputLabel>
                   <Select
                     name="season"
                     value={formData.season}
                     onChange={handleChange}
-                    label="Season"
+                    label={t("farmManagement.season")}
                   >
                     {seasons.map((season) => (
                       <MenuItem key={season} value={season}>
@@ -248,12 +280,12 @@ export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
 
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth required>
-                  <InputLabel>Current Stage</InputLabel>
+                  <InputLabel>{t("farmManagement.currentStage")}</InputLabel>
                   <Select
                     name="currentStage"
                     value={formData.currentStage}
                     onChange={handleChange}
-                    label="Current Stage"
+                    label={t("farmManagement.currentStage")}
                   >
                     {stages.map((stage) => (
                       <MenuItem key={stage} value={stage}>
@@ -266,9 +298,11 @@ export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
             </Grid>
           </DialogContent>
           <DialogActions sx={{ px: 3, pb: 2 }}>
-            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>{t("farmManagement.cancel")}</Button>
             <Button type="submit" variant="contained" disabled={loading}>
-              {loading ? "Adding..." : "Add Farm"}
+              {loading
+                ? t("farmManagement.adding")
+                : t("farmManagement.addFarm")}
             </Button>
           </DialogActions>
         </form>
@@ -290,7 +324,7 @@ export default function AddFarmDialog({ open, onClose, onFarmAdded }) {
             setSuccess(false);
           }}
         >
-          {error || "Farm added successfully!"}
+          {error || t("farmManagement.farmAdded")}
         </Alert>
       </Snackbar>
     </>

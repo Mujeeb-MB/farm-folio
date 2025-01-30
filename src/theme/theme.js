@@ -17,6 +17,7 @@ export const getTheme = (darkMode) =>
       background: {
         default: darkMode ? "#121212" : "#f5f5f5", // Added proper background color
         paper: darkMode ? "#1E1E1E" : "#fff",
+        chat: darkMode ? "#1E1E1E" : "#dcdfe3",
       },
       text: {
         primary: darkMode ? "#fff" : "#000",

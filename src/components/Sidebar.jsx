@@ -24,6 +24,7 @@ import {
   SmartToy,
 } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const drawerWidth = 240;
 
@@ -76,6 +77,37 @@ export default function Sidebar({ open, toggleDrawer }) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const { t } = useTranslation();
+  // Changed how we define menuItems
+  const menuItems = [
+    {
+      text: `${t("sidebar.dashboard")}`,
+      icon: Dashboard, // Remove the JSX syntax
+      path: "/dashboard",
+    },
+    {
+      text: `${t("sidebar.farmManagement")}`,
+      icon: Agriculture,
+      path: "/farm-management",
+    },
+    {
+      text: `${t("sidebar.expenseTracking")}`,
+      icon: Receipt,
+      path: "/expenses",
+    },
+    {
+      text: `${t("sidebar.reportsAnalytics")}`,
+      icon: Analytics,
+      path: "/reports",
+    },
+    {
+      text: `${t("sidebar.farmAI")}`,
+      icon: SmartToy,
+      path: "/farm-ai",
+      highlight: true,
+    },
+  ];
+
   return (
     <Drawer
       variant="permanent"
@@ -100,7 +132,7 @@ export default function Sidebar({ open, toggleDrawer }) {
       >
         {open && (
           <Typography variant="h6" color="primary" noWrap>
-            FARMFOLIO
+            {t("common.farmfolio")}
           </Typography>
         )}
         <IconButton onClick={toggleDrawer}>
@@ -183,7 +215,7 @@ export default function Sidebar({ open, toggleDrawer }) {
             >
               <Help />
             </ListItemIcon>
-            {open && <ListItemText primary="Need Help?" />}
+            {open && <ListItemText primary={t("sidebar.needHelp")} />}
           </ListItemButton>
         </ListItem>
       </Box>

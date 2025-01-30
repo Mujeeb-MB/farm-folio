@@ -7,6 +7,7 @@ import {
   Pending as PendingIcon,
   Done as PaidIcon,
 } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 export default function QuickStats({ stats }) {
   const formatCurrency = (amount) => {
@@ -17,30 +18,32 @@ export default function QuickStats({ stats }) {
     }).format(amount);
   };
 
+  const { t } = useTranslation();
+
   const statCards = [
     {
-      title: "Total Farms",
+      title: `${t("dashboard.totalFarms")}`,
       value: stats.totalFarms,
       icon: FarmIcon,
       color: "primary.main",
       bgColor: "primary.lighter",
     },
     {
-      title: "Total Expenses",
+      title: `${t("dashboard.totalExpenses")}`,
       value: formatCurrency(stats.totalExpenses),
       icon: ExpenseIcon,
       color: "info.main",
       bgColor: "info.lighter",
     },
     {
-      title: "Pending Amount",
+      title: `${t("dashboard.pendingPayments")}`,
       value: formatCurrency(stats.pendingAmount),
       icon: PendingIcon,
       color: "warning.main",
       bgColor: "warning.lighter",
     },
     {
-      title: "Paid Amount",
+      title: `${t("dashboard.paidAmount")}`,
       value: formatCurrency(stats.paidAmount),
       icon: PaidIcon,
       color: "success.main",

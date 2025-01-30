@@ -1,5 +1,5 @@
 // src/components/Expenses/ExpenseTable.jsx
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import {
   Box,
   Paper,
@@ -27,6 +27,7 @@ import { useAuth } from "../../context/AuthContext";
 import { db } from "../../firebase/firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 import DeleteConfirmationDialog from "../common/DeleteConfirmationDialog";
+import { useTranslation } from "react-i18next";
 
 const formatDate = (timestamp) => {
   if (!timestamp) return "-";
@@ -39,6 +40,8 @@ const formatDate = (timestamp) => {
 };
 
 export default function ExpenseTable({ expenses, farmId, onExpenseUpdated }) {
+  const { t } = useTranslation();
+
   const { currentUser } = useAuth();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -117,14 +120,18 @@ export default function ExpenseTable({ expenses, farmId, onExpenseUpdated }) {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Date</TableCell>
-              <TableCell>Category</TableCell>
-              <TableCell>Sub Category</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell align="right">Amount (₹)</TableCell>
-              <TableCell>Payment Status</TableCell>
-              <TableCell>Payment Mode</TableCell>
-              <TableCell align="center">Actions</TableCell>
+              <TableCell>{t("expense.expenseTable.date")}</TableCell>
+              <TableCell>{t("expense.expenseTable.category")}</TableCell>
+              <TableCell>{t("expense.expenseTable.subCategory")}</TableCell>
+              <TableCell>{t("expense.expenseTable.description")}</TableCell>
+              <TableCell align="right">
+                {t("expense.expenseTable.amount")} (₹)
+              </TableCell>
+              <TableCell>{t("expense.expenseTable.paymentStatus")}</TableCell>
+              <TableCell>{t("expense.expenseTable.paymentMode")}</TableCell>
+              <TableCell align="center">
+                {t("expense.expenseTable.actions")}
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -173,7 +180,7 @@ export default function ExpenseTable({ expenses, farmId, onExpenseUpdated }) {
               <TableRow>
                 <TableCell colSpan={8} align="center" sx={{ py: 3 }}>
                   <Typography color="text.secondary">
-                    No expenses found
+                    {t("expense.expenseTable.noExpenses")}
                   </Typography>
                 </TableCell>
               </TableRow>
@@ -200,11 +207,11 @@ export default function ExpenseTable({ expenses, farmId, onExpenseUpdated }) {
       >
         <MenuItem onClick={handleMenuClose}>
           <EditIcon fontSize="small" sx={{ mr: 1 }} />
-          Edit
+          {t("expense.expenseTable.edit")}
         </MenuItem>
         <MenuItem onClick={handleDeleteClick} sx={{ color: "error.main" }}>
           <DeleteIcon fontSize="small" sx={{ mr: 1 }} />
-          Delete
+          {t("expense.expenseTable.delete")}
         </MenuItem>
       </Menu>
 

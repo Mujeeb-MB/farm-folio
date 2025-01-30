@@ -9,9 +9,11 @@ import {
   Chip,
 } from "@mui/material";
 import { Edit as EditIcon, Delete as DeleteIcon } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 export default function FarmCard({ farm, onEdit, onDelete }) {
   if (!farm) return null;
+  const { t } = useTranslation();
 
   const handleEdit = () => {
     console.log("Farm being edited:", farm); // Debug log
@@ -55,11 +57,11 @@ export default function FarmCard({ farm, onEdit, onDelete }) {
 
         <Box sx={{ mt: 2 }}>
           <Typography variant="body2" gutterBottom>
-            Area: {farm.totalArea} {farm.areaUnit}
+            {t("farmManagement.acres")}: {farm.totalArea} {farm.areaUnit}
           </Typography>
 
           <Typography variant="body2" gutterBottom>
-            Crop: {farm.cropType || "Not specified"}
+            {t("farmManagement.cropType")}: {farm.cropType || "Not specified"}
           </Typography>
 
           <Box sx={{ mt: 1, display: "flex", gap: 1 }}>

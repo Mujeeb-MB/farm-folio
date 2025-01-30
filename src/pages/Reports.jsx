@@ -20,8 +20,11 @@ import ExpenseAnalysis from "../components/Reports/ExpenseAnalysis";
 import CategoryAnalysis from "../components/Reports/CategoryAnalysis";
 import MonthlyTrends from "../components/Reports/MonthlyTrends";
 import PaymentAnalysis from "../components/Reports/PaymentAnalysis";
+import { useTranslation } from "react-i18next";
 
 export default function Reports() {
+  const { t } = useTranslation();
+
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -84,7 +87,7 @@ export default function Reports() {
   return (
     <Box>
       <Typography variant="h5" fontWeight="600" gutterBottom>
-        Reports & Analytics
+        {t("reports.reportsAnalytics")}
       </Typography>
 
       <Card sx={{ mb: 3 }}>
@@ -92,14 +95,14 @@ export default function Reports() {
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
               <FormControl fullWidth>
-                <InputLabel>Select Farm</InputLabel>
+                <InputLabel>{t("reports.selectFarm")}</InputLabel>
                 <Select
                   value={selectedFarm}
                   onChange={(e) => setSelectedFarm(e.target.value)}
-                  label="Select Farm"
+                  label={t("reports.selectFarm")}
                 >
                   <MenuItem value="">
-                    <em>Select a farm</em>
+                    <em>{t("reports.selectAFarm")}</em>
                   </MenuItem>
                   {farms.map((farm) => (
                     <MenuItem key={farm.id} value={farm.id}>
@@ -139,9 +142,9 @@ export default function Reports() {
           </Grid>
         </Grid>
       ) : selectedFarm ? (
-        <Alert severity="info">No expenses found for the selected farm.</Alert>
+        <Alert severity="info">{t("reports.noExpenses")}</Alert>
       ) : (
-        <Alert severity="info">Please select a farm to view analytics.</Alert>
+        <Alert severity="info">{t("reports.pleaseSelectFarm")}</Alert>
       )}
     </Box>
   );

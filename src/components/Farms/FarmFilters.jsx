@@ -10,16 +10,23 @@ import {
   IconButton,
   Tooltip,
 } from "@mui/material";
-import { Clear as ClearIcon } from "@mui/icons-material";
-import { crops } from "../../constants/crops";
-
-const seasons = ["Kharif", "Rabi", "Zaid"];
+import { Clear as ClearIcon, Crop } from "@mui/icons-material";
+import { CropsComponent } from "../../constants/crops";
+import { useTranslation } from "react-i18next";
 
 export default function FarmFilters({
   filters,
   onFilterChange,
   onClearFilters,
 }) {
+  const { t } = useTranslation();
+  const crops = CropsComponent();
+  const seasons = [
+    `${t("farmManagement.farmFilter.kharif")}`,
+    `${t("farmManagement.farmFilter.rabi")}`,
+    `${t("farmManagement.farmFilter.zaid")}`,
+  ];
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     onFilterChange({ ...filters, [name]: value });
@@ -29,7 +36,7 @@ export default function FarmFilters({
     <Box sx={{ mb: 3, display: "flex", gap: 2, flexWrap: "wrap" }}>
       <TextField
         name="search"
-        label="Search farms"
+        label={t("farmManagement.farmFilter.searchFarm")}
         size="small"
         value={filters.search || ""}
         onChange={handleChange}
@@ -37,14 +44,16 @@ export default function FarmFilters({
       />
 
       <FormControl size="small" sx={{ minWidth: 200 }}>
-        <InputLabel>Crop Category</InputLabel>
+        <InputLabel>{t("farmManagement.farmFilter.cropCategory")}</InputLabel>
         <Select
           name="cropCategory"
           value={filters.cropCategory || ""}
           onChange={handleChange}
-          label="Crop Category"
+          label={t("farmManagement.farmFilter.cropCategory")}
         >
-          <MenuItem value="">All Categories</MenuItem>
+          <MenuItem value="">
+            {t("farmManagement.farmFilter.allCategories")}
+          </MenuItem>
           {Object.keys(crops).map((category) => (
             <MenuItem key={category} value={category}>
               {category}
@@ -54,14 +63,16 @@ export default function FarmFilters({
       </FormControl>
 
       <FormControl size="small" sx={{ minWidth: 200 }}>
-        <InputLabel>Season</InputLabel>
+        <InputLabel>{t("farmManagement.farmFilter.season")}</InputLabel>
         <Select
           name="season"
           value={filters.season || ""}
           onChange={handleChange}
-          label="Season"
+          label={t("farmManagement.farmFilter.season")}
         >
-          <MenuItem value="">All Seasons</MenuItem>
+          <MenuItem value="">
+            {t("farmManagement.farmFilter.allSeasons")}
+          </MenuItem>
           {seasons.map((season) => (
             <MenuItem key={season} value={season}>
               {season}

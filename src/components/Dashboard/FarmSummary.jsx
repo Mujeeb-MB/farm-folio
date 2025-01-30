@@ -17,18 +17,20 @@ import {
   LocationOn as LocationIcon,
   Straighten as AreaIcon,
 } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 export default function FarmSummary({ farms }) {
+  const { t } = useTranslation();
   return (
     <Card>
       <CardContent>
         <Typography variant="h6" gutterBottom>
-          Farm Summary
+          {t("dashboard.farmSummary")}
         </Typography>
 
         {farms.length === 0 ? (
           <Typography color="text.secondary" align="center" sx={{ py: 2 }}>
-            No farms added yet
+            {t("dashboard.noFarms")}
           </Typography>
         ) : (
           <List>

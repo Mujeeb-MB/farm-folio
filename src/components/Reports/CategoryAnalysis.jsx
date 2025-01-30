@@ -21,6 +21,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import { useTranslation } from "react-i18next";
 
 // Custom colors for the pie chart
 const COLORS = [
@@ -39,6 +40,8 @@ const COLORS = [
 ];
 
 export default function CategoryAnalysis({ expenses }) {
+  const { t } = useTranslation();
+
   const categoryData = useMemo(() => {
     // Group expenses by category
     const categoryGroups = expenses.reduce((acc, expense) => {
@@ -91,13 +94,13 @@ export default function CategoryAnalysis({ expenses }) {
         >
           <Typography variant="subtitle2">{data.name}</Typography>
           <Typography variant="body2" color="text.secondary">
-            Amount: {formatCurrency(data.value)}
+            {t("reports.amount")}: {formatCurrency(data.value)}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Percentage: {data.percentage}%
+            {t("reports.percentage")}: {data.percentage}%
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Count: {data.count} expenses
+            {t("reports.count")}: {data.count} expenses
           </Typography>
         </Box>
       );
@@ -109,7 +112,7 @@ export default function CategoryAnalysis({ expenses }) {
     <Card>
       <CardContent>
         <Typography variant="h6" gutterBottom>
-          Category-wise Analysis
+          {t("reports.categoryAnalysis")}
         </Typography>
 
         {/* Pie Chart */}
@@ -143,10 +146,10 @@ export default function CategoryAnalysis({ expenses }) {
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell>Category</TableCell>
-                <TableCell align="right">Amount</TableCell>
-                <TableCell align="right">Percentage</TableCell>
-                <TableCell align="right">Count</TableCell>
+                <TableCell>{t("reports.category")}</TableCell>
+                <TableCell align="right">{t("reports.amount")}</TableCell>
+                <TableCell align="right">{t("reports.percentage")}</TableCell>
+                <TableCell align="right">{t("reports.count")}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

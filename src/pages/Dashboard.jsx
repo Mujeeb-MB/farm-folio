@@ -22,6 +22,7 @@ import RecentExpenses from "../components/Dashboard/RecentExpenses";
 import ExpenseOverview from "../components/Dashboard/ExpenseOverview";
 import FarmSummary from "../components/Dashboard/FarmSummary";
 import QuickStats from "../components/Dashboard/QuickStats";
+import { useTranslation } from "react-i18next";
 
 export default function Dashboard() {
   const { currentUser } = useAuth();
@@ -37,6 +38,8 @@ export default function Dashboard() {
       paidAmount: 0,
     },
   });
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -129,7 +132,7 @@ export default function Dashboard() {
   return (
     <Box>
       <Typography variant="h5" fontWeight="600" gutterBottom>
-        Dashboard
+        {t("dashboard.heading")}
       </Typography>
 
       {/* Quick Stats */}

@@ -14,6 +14,7 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export default function ExpensePrintView({
   open,
@@ -21,6 +22,7 @@ export default function ExpensePrintView({
   expenses,
   farmName,
 }) {
+  const { t } = useTranslation();
   const handlePrint = () => {
     window.print();
   };
@@ -45,7 +47,9 @@ export default function ExpensePrintView({
       }}
     >
       <DialogTitle sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography variant="h6">Expense Report</Typography>
+        <Typography variant="h6">
+          {t("expense.expensePrint.expenseReport")}
+        </Typography>
         <Typography variant="subtitle1">
           {new Date().toLocaleDateString()}
         </Typography>
@@ -55,18 +59,21 @@ export default function ExpensePrintView({
         <Box sx={{ mb: 3 }}>
           <Typography variant="h5">{farmName}</Typography>
           <Typography variant="subtitle2" color="text.secondary">
-            Total Expenses: ₹{totalAmount.toLocaleString()}
+            {t("expense.expensePrint.totalExpenses")}: ₹
+            {totalAmount.toLocaleString()}
           </Typography>
         </Box>
 
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Date</TableCell>
-              <TableCell>Category</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell align="right">Amount</TableCell>
-              <TableCell>Status</TableCell>
+              <TableCell>{t("expense.expensePrint.date")}</TableCell>
+              <TableCell>{t("expense.expensePrint.category")}</TableCell>
+              <TableCell>{t("expense.expensePrint.description")}</TableCell>
+              <TableCell align="right">
+                {t("expense.expensePrint.amount")}
+              </TableCell>
+              <TableCell>{t("expense.expensePrint.status")}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -88,9 +95,9 @@ export default function ExpensePrintView({
       </DialogContent>
 
       <DialogActions sx={{ "@media print": { display: "none" } }}>
-        <Button onClick={onClose}>Close</Button>
+        <Button onClick={onClose}>{t("expense.expensePrint.close")}</Button>
         <Button onClick={handlePrint} variant="contained">
-          Print
+          {t("expense.expensePrint.print")}
         </Button>
       </DialogActions>
     </Dialog>

@@ -95,74 +95,182 @@
     "signUp": "अभी साइन अप करें"
 },
 
-  "auth": {
-    "welcomeBack": "वापसी पर स्वागत है",
-    "createAccount": "खाता बनाएं",
-    "forgotPassword": "पासवर्ड भूल गए?",
-    "resetPassword": "पासवर्ड रीसेट करें",
-    "email": "ईमेल",
-    "password": "पासवर्ड",
-    "confirmPassword": "पासवर्ड की पुष्टि करें",
-    "firstName": "पहला नाम",
-    "lastName": "अंतिम नाम",
-    "orContinueWith": "या जारी रखें",
-    "alreadyHaveAccount": "पहले से खाता है?",
-    "dontHaveAccount": "खाता नहीं है?",
-    "signInHere": "यहां लॉग इन करें",
-    "signUpHere": "यहां साइन अप करें",
-    "googleSignIn": "Google के साथ जारी रखें"
-  },
 
-  "nav": {
+"nav": {
+  "settings": "सेटिंग्स",
+  "profile": "प्रोफ़ाइल",
+  "privacy": "गोपनीयता नीति",
+  "signout": "साइन आउट"
+},
+
+  "sidebar": {
     "dashboard": "डैशबोर्ड",
     "farmManagement": "खेत प्रबंधन",
     "expenseTracking": "खर्च ट्रैकिंग",
-    "reports": "रिपोर्ट और विश्लेषण",
+    "reportsAnalytics": "रिपोर्ट और विश्लेषण",
     "farmAI": "फार्म एआई",
-    "settings": "सेटिंग्स",
-    "profile": "प्रोफाइल",
-    "help": "मदद चाहिए?"
+    "needHelp": "मदद चाहिए?"
   },
 
   "dashboard": {
-    "welcome": "फार्मफोलियो में आपका स्वागत है",
+    "heading": "डैशबोर्ड",
     "totalFarms": "कुल खेत",
     "totalExpenses": "कुल खर्च",
-    "recentExpenses": "हाल के खर्चे",
-    "quickStats": "त्वरित आंकड़े",
-    "farmSummary": "खेत का सारांश",
-    "expenseOverview": "खर्च का अवलोकन",
     "pendingPayments": "बकाया भुगतान",
-    "paidAmount": "भुगतान की गई राशि"
+    "paidAmount": "भुगतान की गई राशि",
+    "farmSummary": "खेत सारांश",
+    "noFarm": "अभी तक कोई खेत नहीं जोड़ा गया",
+    "expenseOverview": {
+      "title": "खर्च अवलोकन",
+      "month": "महीना",
+      "paid": "भुगतान किया गया",
+      "pending": "बकाया"
+    },
+    "recentExpenses": {
+      "title": "हाल के खर्च",
+      "date": "तिथि",
+      "farm": "खेत",
+      "category": "श्रेणी",
+      "description": "विवरण",
+      "amount": "राशि",
+      "status": "स्थिति",
+      "noExpenses": "कोई हाल के खर्च नहीं"
+    },
+    "quickStats": "त्वरित आँकड़े"
   },
 
-  "farm": {
-    "addFarm": "खेत जोड़ें",
-    "editFarm": "खेत संपादित करें",
-    "deleteFarm": "खेत हटाएं",
-    "farmName": "खेत का नाम",
-    "location": "स्थान",
-    "village": "गांव",
-    "mandal": "मंडल",
-    "district": "जिला",
-    "area": "क्षेत्रफल",
-    "areaUnit": "क्षेत्रफल इकाई",
-    "acres": "एकड़",
-    "guntas": "गुंटा",
-    "cropType": "फसल का प्रकार",
+ "farmManagement": {
+  "heading": "खेत प्रबंधन",
+  "addFarm": "खेत जोड़ें",
+  "farmFilter":{
+    "allSeasons": "सभी मौसम",
+    "kharif": "खरीफ",
+    "rabi": "रबी",
+    "zaid": "जायद",
+    "searchFarm": "खेत खोजें",
+    "cropCategory": "फसल श्रेणी",
     "season": "मौसम",
-    "currentStage": "वर्तमान स्थिति",
-    "status": "स्थिति",
-    "active": "सक्रिय",
-    "inactive": "निष्क्रिय",
-    "deleteConfirm": "क्या आप वाकई इस खेत को हटाना चाहते हैं?",
-    "farmAdded": "खेत सफलतापूर्वक जोड़ा गया",
-    "farmUpdated": "खेत सफलतापूर्वक अपडेट किया गया",
-    "farmDeleted": "खेत सफलतापूर्वक हटाया गया"
+    "allCategories": "सभी श्रेणियाँ"
+  },
+  "storeBy": "द्वारा संग्रहीत करें",
+  "dateAdded": "जोड़े जाने की तिथि",
+  "editFarm": "खेत संपादित करें",
+  "deleteFarm": "खेत हटाएं",
+  "area": "क्षेत्र",
+  "noFarmsAdded": "अभी तक कोई खेत नहीं जोड़ा गया",
+  "noFarmsMatch": "आपके फ़िल्टर से कोई खेत मेल नहीं खाता",
+  "addFirstFarm": "अपना पहला खेत जोड़ें",
+  "addNewFarm": "नया खेत जोड़ें",
+  "farmName": "खेत का नाम",
+  "village": "गाँव",
+  "mandal": "मंडल",
+  "district": "जिला",
+  "totalArea": "कुल क्षेत्र",
+  "areaUnit": "क्षेत्र इकाई",
+  "acres": "एकड़",
+  "guntas": "गुंटा",
+  "cropCategory": "फसल श्रेणी",
+  "cropType": "फसल प्रकार",
+  "season": "मौसम",
+  "kharif": "खरीफ",
+  "rabi": "रबी",
+  "zaid": "जायद",
+  "currentStage": "वर्तमान चरण",
+  "landPreparation": "भूमि तैयारी",
+  "sowing": "बुवाई",
+  "growing": "विकास",
+  "harvesting": "कटाई",
+  "status": "स्थिति",
+  "active": "सक्रिय",
+  "inactive": "निष्क्रिय",
+  "location": "स्थान",
+  "cancel": "रद्द करें",
+  "adding": "जोड़ रहा है...", 
+  "deleteConfirm": "क्या आप वाकई इस खेत को हटाना चाहते हैं?",
+  "farmAdded": "खेत सफलतापूर्वक जोड़ा गया",
+  "updating": "अपडेट कर रहा है...", 
+  "updateFarm": "खेत अपडेट करें",
+  "farmUpdated": "खेत सफलतापूर्वक अपडेट किया गया",
+  "farmDeleted": "खेत सफलतापूर्वक हटाया गया"
+  },
+
+  "crops": {
+  "cereals": {
+    "title": "अनाज",
+    "paddy": "धान (चावल)",
+    "wheat": "गेहूं",
+    "jowar": "ज्वार",
+    "bajra": "बाजरा",
+    "ragi": "रागी",
+    "maize": "मक्का"
+  },
+  "pulses": {
+    "title": "दालें",
+    "redGram": "अरहर",
+    "blackGram": "उड़द",
+    "greenGram": "मूंग",
+    "bengalGram": "चना",
+    "horseGram": "कुलथी",
+    "cowpea": "लोबिया"
+  },
+  "oilseeds": {
+    "title": "तिलहन",
+    "groundnut": "मूंगफली",
+    "sunflower": "सूरजमुखी",
+    "sesame": "तिल",
+    "soybean": "सोयाबीन",
+    "mustard": "सरसों",
+    "castor": "अरंडी"
+  },
+  "commercial": {
+    "title": "व्यावसायिक फसलें",
+    "cotton": "कपास",
+    "sugarcane": "गन्ना",
+    "tobacco": "तंबाकू",
+    "jute": "जूट"
+  },
+  "vegetables": {
+    "title": "सब्जियाँ",
+    "tomato": "टमाटर",
+    "onion": "प्याज",
+    "potato": "आलू",
+    "brinjal": "बैंगन",
+    "okra": "भिंडी",
+    "cabbage": "पत्ता गोभी",
+    "cauliflower": "फूलगोभी",
+    "carrot": "गाजर",
+    "greenChilli": "हरी मिर्च",
+    "cucumber": "खीरा"
+  },
+  "fruits": {
+    "title": "फल",
+    "mango": "आम",
+    "banana": "केला",
+    "grapes": "अंगूर",
+    "pomegranate": "अनार",
+    "papaya": "पपीता",
+    "orange": "संतरा",
+    "guava": "अमरूद",
+    "watermelon": "तरबूज"
+  },
+  "spices": {
+    "title": "मसाले",
+    "turmeric": "हल्दी",
+    "chilli": "मिर्च",
+    "ginger": "अदरक",
+    "cardamom": "इलायची",
+    "blackPepper": "काली मिर्च",
+    "coriander": "धनिया"
+  }
   },
 
   "expense": {
+    "heading": "खर्च ट्रैकिंग",
+    "printReport":"रिपोर्ट प्रिंट करें",
+    "exportReport":"एक्सेल में निर्यात करें",
     "addExpense": "खर्च जोड़ें",
+    "selectFarm": "खेत चुनें",
+    "selectAFarm": "एक खेत चुनें",
     "editExpense": "खर्च संपादित करें",
     "deleteExpense": "खर्च हटाएं",
     "category": "श्रेणी",
@@ -172,52 +280,185 @@
     "description": "विवरण",
     "paymentStatus": "भुगतान की स्थिति",
     "paymentMode": "भुगतान का तरीका",
-    "paid": "भुगतान किया गया",
-    "pending": "बकाया",
     "cash": "नकद",
     "upi": "यूपीआई",
     "bankTransfer": "बैंक ट्रांसफर",
-    "credit": "उधार",
+    "credit": "क्रेडिट",
+    "expenseAdded": "खर्च सफलतापूर्वक जोड़ा गया",
+    "expenseUpdated": "खर्च सफलतापूर्वक अपडेट किया गया",
+    "expenseDeleted": "खर्च सफलतापूर्वक हटाया गया",
+    "pleaseSelectFarm":"कृपया खर्च देखने के लिए एक खेत चुनें",
+    "expenseFilter":{
+      "fromDate": "तिथि से",
+      "toDate": "तिथि तक",
+      "category": "श्रेणी",
+      "allCategories": "सभी श्रेणियाँ",
+      "allStatus": "सभी स्थिति",
+      "sortBy": "क्रमबद्ध करें",
+      "date": "तिथि",
+      "amount": "राशि",
+      "clearFilters": "फ़िल्टर साफ़ करें"
+    },
     "categories": {
-      "seeds": "बीज",
-      "fertilizers": "उर्वरक",
-      "pesticides": "कीटनाशक",
-      "labor": "मजदूरी",
-      "equipment": "उपकरण",
-      "irrigation": "सिंचाई",
-      "transportation": "परिवहन",
-      "others": "अन्य"
+      "seeds": {
+        "title": "बीज",
+        "cropSeeds": "फसल बीज",
+        "hybridSeeds": "हाइब्रिड बीज",
+        "organicSeeds": "जैविक बीज"
+      },
+      "fertilizers": {
+        "title": "उर्वरक",
+        "organicFertilizers": "जैविक उर्वरक",
+        "chemicalFertilizers": "रासायनिक उर्वरक",
+        "bioFertilizers": "जैव उर्वरक"
+      },
+      "labor": {
+        "title": "श्रम",
+        "landPreparation": "भूमि तैयारी",
+        "sowing": "बुवाई",
+        "weeding": "निराई",
+        "harvesting": "कटाई",
+        "dailyWages": "दैनिक मजदूरी"
+      },
+      "equipment": {
+        "title": "उपकरण",
+        "machineryRent": "मशीनरी किराया",
+        "toolsPurchase": "उपकरण खरीद",
+        "maintenance": "रखरखाव"
+      },
+      "pesticides": {
+        "title": "कीटनाशक",
+        "insecticides": "कीटनाशक",
+        "fungicides": "फफूंदनाशक",
+        "weedicides": "शाकनाशी"
+      },
+      "irrigation": {
+        "title": "सिंचाई",
+        "waterCharges": "पानी के शुल्क",
+        "fuelCharges": "ईंधन शुल्क",
+        "equipmentMaintenance": "उपकरण रखरखाव"
+      },
+      "transportation": {
+        "title": "परिवहन",
+        "vehicleRent": "वाहन किराया",
+        "fuel": "ईंधन",
+        "loadingUnloading": "लोडिंग/अनलोडिंग"
+      },
+      "others": {
+        "title": "अन्य",
+        "miscellaneous": "विविध"
+      }
+    },
+    "paymentStatusFilter": {
+      "paid": "भुगतान किया गया",
+      "pending": "बकाया"
+    },
+    "paymentModeFilter": {
+      "cash": "नकद",
+      "upi": "यूपीआई",
+      "bankTransfer": "बैंक ट्रांसफर",
+      "credit": "क्रेडिट"
+    },
+    "expenseSummary":{
+      "totalExpenses" : "कुल खर्च",
+      "paidAmount":"भुगतान की गई राशि",
+      "pendingAmount": "बकाया राशि",
+      "categoryExpense": "श्रेणीवार खर्च"
+    },
+    "expenseTable":{
+      "date": "तिथि",
+      "category":"श्रेणी",
+      "subCategory":"उप श्रेणी",
+      "description":"विवरण",
+      "amount":"राशि",
+      "paymentStatus":"भुगतान की स्थिति",
+      "paymentMode":"भुगतान का तरीका",
+      "actions": "क्रियाएँ",
+      "paid": "भुगतान किया गया",
+      "pending": "बकाया",
+      "noExpenses":"कोई खर्च नहीं मिला",
+      "edit":"संपादित करें",
+      "delete":"हटाएं"
+    },
+    "addExpenses":{
+      "paid": "भुगतान किया गया",
+      "pending": "बकाया",
+      "cash":"नकद",
+      "addNewExpense":"नया खर्च जोड़ें",
+      "category":"श्रेणी",
+      "subCategory":"उप श्रेणी",
+      "amount":"राशि",
+      "date":"तिथि",
+      "paymentStatus":"भुगतान की स्थिति",
+      "paymentMode":"भुगतान का तरीका",
+      "description":"विवरण",
+      "cancel":"रद्द करें",
+      "adding":"जोड़ रहा है...",
+      "addExpense":"खर्च जोड़ें",
+      "expenseAdded":"खर्च सफलतापूर्वक जोड़ा गया"
+    },
+    "expensePrint":{
+      "expenseReport":"खर्च रिपोर्ट",
+      "totalExpenses":"कुल खर्च",
+      "date":"तिथि",
+      "category":"श्रेणी",
+      "description":"विवरण",
+      "amount":"राशि",
+      "status":"स्थिति",
+      "close": "बंद करें",
+      "print":"प्रिंट करें"
     }
   },
 
   "reports": {
+    "reportsAnalytics": "रिपोर्ट और विश्लेषण",
+    "selectFarm": "खेत चुनें",
+    "selectAFarm": "एक खेत चुनें",
     "expenseAnalysis": "खर्च विश्लेषण",
-    "categoryAnalysis": "श्रेणी विश्लेषण",
-    "monthlyTrends": "मासिक रुझान",
+    "categoryDistribution": "श्रेणी वितरण",
+    "amount": "राशि",
+    "percentage": "प्रतिशत",
+    "count": "गिनती",
+    "categoryAnalysis": "श्रेणीवार विश्लेषण",
+    "category": "श्रेणी",
     "paymentAnalysis": "भुगतान विश्लेषण",
-    "exportReport": "रिपोर्ट निर्यात करें",
-    "printReport": "रिपोर्ट प्रिंट करें",
-    "filterByDate": "तिथि के अनुसार फ़िल्टर करें",
-    "filterByCategory": "श्रेणी के अनुसार फ़िल्टर करें",
-    "filterByStatus": "स्थिति के अनुसार फ़िल्टर करें",
-    "from": "से",
-    "to": "तक",
+    "paymentStatus": "भुगतान स्थिति वितरण",
+    "paymentMode": "भुगतान मोड वितरण",
+    "monthlyStatusTrends": "मासिक स्थिति प्रवृत्ति",
+    "paymentType": "भुगतान प्रकार",
     "total": "कुल",
-    "average": "औसत",
-    "highest": "सबसे अधिक",
-    "lowest": "सबसे कम"
+    "average": "औसत/खर्च",
+    "monthlyTrends": "मासिक प्रवृत्तियाँ",
+    "viewType": "दृश्य प्रकार",
+    "areaChart": "क्षेत्र चार्ट",
+    "lineChart": "रेखा चार्ट",
+    "timeFrame": "समय सीमा",
+    "months": "महीने",
+    "averagMonthlyExp": "औसत मासिक खर्च",
+    "highestMonthlyExp": "उच्चतम मासिक खर्च",
+    "totalMonthlyExp": "कुल खर्च (अवधि)",
+    "noExpenses": "चयनित खेत के लिए कोई खर्च नहीं मिला।",
+    "pleaseSelectFarm": "विश्लेषण देखने के लिए कृपया एक खेत चुनें।"
   },
 
   "farmAI": {
-    "assistant": "फार्म एआई सहायक",
-    "chat": "एआई चैट",
+    "assistant": "फार्मएआई सहायक",
+    "chat": "फार्मएआई चैट",
     "diseaseDetection": "रोग पहचान",
+    "chatDesc": "फसल योजना, उर्वरक और खेती सलाह के लिए एआई सहायता प्राप्त करें",
+    "diseaseDetectionDesc": "रोगों का पता लगाने और उपचार सुझाव प्राप्त करने के लिए पौधों की छवियां अपलोड करें",
+    "comingSoon": "रोग पहचान जल्द आ रही है",
+    "tryAsking": "पूछने का प्रयास करें",
     "askAnything": "खेती के बारे में कुछ भी पूछें...",
     "uploadImage": "छवि अपलोड करें",
     "takePhoto": "फोटो लें",
-    "analyzing": "विश्लेषण हो रहा है...",
+    "analyzing": "विश्लेषण कर रहा है...",
     "suggestions": "सुझाव",
     "treatment": "उपचार",
-    "prevention": "रोकथाम"
+    "prevention": "रोकथाम",
+    "examplePrompt1":"गर्मी में रेतीली मिट्टी के लिए कौन सी फसलें उपयुक्त हैं?",
+    "examplePrompt2":"चावल की खेती के लिए उर्वरकों की सिफारिश करें",
+    "examplePrompt3":"टमाटर के पत्तों की बीमारियों को कैसे रोकें?",
+    "examplePrompt4":"जैविक खेती के सर्वोत्तम अभ्यास"
   }
 }

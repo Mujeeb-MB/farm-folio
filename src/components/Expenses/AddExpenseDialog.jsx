@@ -19,10 +19,11 @@ import { useAuth } from "../../context/AuthContext";
 import { db } from "../../firebase/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import {
-  expenseCategories,
-  paymentModes,
-  paymentStatuses,
+  useExpenseCategories,
+  usePaymentStatuses,
+  usePaymentModes,
 } from "../../constants/expenses";
+import { useTranslation } from "react-i18next";
 
 export default function AddExpenseDialog({
   open,
@@ -30,6 +31,11 @@ export default function AddExpenseDialog({
   farmId,
   onExpenseAdded,
 }) {
+  const { t } = useTranslation();
+  const expenseCategories = useExpenseCategories();
+  const paymentStatuses = usePaymentStatuses();
+  const paymentModes = usePaymentModes();
+
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -41,8 +47,8 @@ export default function AddExpenseDialog({
     amount: "",
     date: new Date().toISOString().split("T")[0], // Format: YYYY-MM-DD
     description: "",
-    paymentStatus: "Pending",
-    paymentMode: "Cash",
+    paymentStatus: `${t("expense.addExpenses.pending")}`,
+    paymentMode: `${t("expense.addExpenses.cash")}`,
   });
 
   const handleChange = (e) => {
@@ -95,8 +101,8 @@ export default function AddExpenseDialog({
       amount: "",
       date: new Date().toISOString().split("T")[0],
       description: "",
-      paymentStatus: "Pending",
-      paymentMode: "Cash",
+      paymentStatus: `${t("expense.addExpenses.pending")}`,
+      paymentMode: `${t("expense.addExpenses.cash")}`,
     });
     setError("");
     onClose();
@@ -113,18 +119,18 @@ export default function AddExpenseDialog({
           sx: { borderRadius: 2 },
         }}
       >
-        <DialogTitle>Add New Expense</DialogTitle>
+        <DialogTitle>{t("expense.addExpenses.pending")}</DialogTitle>
         <form onSubmit={handleSubmit}>
           <DialogContent>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth required>
-                  <InputLabel>Category</InputLabel>
+                  <InputLabel>{t("expense.addExpenses.category")}</InputLabel>
                   <Select
                     name="category"
                     value={formData.category}
                     onChange={handleChange}
-                    label="Category"
+                    label={t("expense.addExpenses.category")}
                   >
                     {Object.keys(expenseCategories).map((category) => (
                       <MenuItem key={category} value={category}>
@@ -137,12 +143,14 @@ export default function AddExpenseDialog({
 
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth required disabled={!formData.category}>
-                  <InputLabel>Sub Category</InputLabel>
+                  <InputLabel>
+                    {t("expense.addExpenses.subCategory")}
+                  </InputLabel>
                   <Select
                     name="subCategory"
                     value={formData.subCategory}
                     onChange={handleChange}
-                    label="Sub Category"
+                    label={t("expense.addExpenses.subCategory")}
                   >
                     {formData.category &&
                       expenseCategories[formData.category].map((subCat) => (
@@ -157,7 +165,7 @@ export default function AddExpenseDialog({
               <Grid item xs={12} sm={6}>
                 <TextField
                   name="amount"
-                  label="Amount"
+                  label={t("expense.addExpenses.amount")}
                   type="number"
                   fullWidth
                   required
@@ -170,7 +178,7 @@ export default function AddExpenseDialog({
               <Grid item xs={12} sm={6}>
                 <TextField
                   name="date"
-                  label="Date"
+                  label={t("expense.addExpenses.date")}
                   type="date"
                   fullWidth
                   required
@@ -184,12 +192,14 @@ export default function AddExpenseDialog({
 
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth required>
-                  <InputLabel>Payment Status</InputLabel>
+                  <InputLabel>
+                    {t("expense.addExpenses.paymentStatus")}
+                  </InputLabel>
                   <Select
                     name="paymentStatus"
                     value={formData.paymentStatus}
                     onChange={handleChange}
-                    label="Payment Status"
+                    label={t("expense.addExpenses.paymentStatus")}
                   >
                     {paymentStatuses.map((status) => (
                       <MenuItem key={status} value={status}>
@@ -202,12 +212,14 @@ export default function AddExpenseDialog({
 
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth required>
-                  <InputLabel>Payment Mode</InputLabel>
+                  <InputLabel>
+                    {t("expense.addExpenses.paymentMode")}
+                  </InputLabel>
                   <Select
                     name="paymentMode"
                     value={formData.paymentMode}
                     onChange={handleChange}
-                    label="Payment Mode"
+                    label={t("expense.addExpenses.paymentMode")}
                   >
                     {paymentModes.map((mode) => (
                       <MenuItem key={mode} value={mode}>
@@ -221,7 +233,7 @@ export default function AddExpenseDialog({
               <Grid item xs={12}>
                 <TextField
                   name="description"
-                  label="Description"
+                  label={t("expense.addExpenses.description")}
                   multiline
                   rows={3}
                   fullWidth
@@ -232,9 +244,13 @@ export default function AddExpenseDialog({
             </Grid>
           </DialogContent>
           <DialogActions sx={{ px: 3, pb: 2 }}>
-            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>
+              {t("expense.addExpenses.cancel")}
+            </Button>
             <Button type="submit" variant="contained" disabled={loading}>
-              {loading ? "Adding..." : "Add Expense"}
+              {loading
+                ? `${t("expense.addExpenses.adding")}`
+                : `${t("expense.addExpenses.addExpense")}`}
             </Button>
           </DialogActions>
         </form>
@@ -256,7 +272,7 @@ export default function AddExpenseDialog({
             setSuccess(false);
           }}
         >
-          {error || "Expense added successfully!"}
+          {error || `${t("expense.addExpenses.expenseAdded")}`}
         </Alert>
       </Snackbar>
     </>

@@ -18,18 +18,47 @@ import {
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../firebase/firebase";
 import { doc, updateDoc, serverTimestamp } from "firebase/firestore";
-import { crops } from "../../constants/crops";
-
-const seasons = ["Kharif", "Rabi", "Zaid"];
-const stages = ["Land Preparation", "Sowing", "Growing", "Harvesting"];
-const areaUnits = ["Acres", "Guntas"];
+import { CropsComponent } from "../../constants/crops";
+import { useTranslation } from "react-i18next";
 
 export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
+  const crops = CropsComponent();
+  const { t, i18n } = useTranslation();
   const { currentUser } = useAuth();
+
+  const seasons = [
+    t("farmManagement.kharif"),
+    t("farmManagement.rabi"),
+    t("farmManagement.zaid"),
+  ];
+
+  const stages = [
+    t("farmManagement.landPreparation"),
+    t("farmManagement.sowing"),
+    t("farmManagement.growing"),
+    t("farmManagement.harvesting"),
+  ];
+
+  const areaUnits = [t("farmManagement.acres"), t("farmManagement.guntas")];
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [initialized, setInitialized] = useState(false);
+
+  // Convert standard value to translated value
+  const getTranslatedAreaUnit = (standardUnit) => {
+    if (standardUnit === "acres") return t("farmManagement.acres");
+    if (standardUnit === "guntas") return t("farmManagement.guntas");
+    return standardUnit;
+  };
+
+  // Convert translated value to standard value
+  const getStandardAreaUnit = (translatedUnit) => {
+    if (translatedUnit === t("farmManagement.acres")) return "acres";
+    if (translatedUnit === t("farmManagement.guntas")) return "guntas";
+    return translatedUnit;
+  };
 
   const [formData, setFormData] = useState({
     farmName: "",
@@ -37,13 +66,14 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
     mandal: "",
     district: "",
     totalArea: "",
-    areaUnit: "Acres",
+    areaUnit: t("farmManagement.acres"),
     cropCategory: "",
     cropType: "",
     season: "",
     currentStage: "",
   });
 
+  // Initialize form data when farm prop changes
   useEffect(() => {
     if (farm && !initialized) {
       const category = Object.keys(crops).find((cat) =>
@@ -56,7 +86,7 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
         mandal: farm.mandal || "",
         district: farm.district || "",
         totalArea: farm.totalArea || "",
-        areaUnit: farm.areaUnit || "Acres",
+        areaUnit: getTranslatedAreaUnit(farm.areaUnit),
         cropCategory: category || "",
         cropType: farm.cropType || "",
         season: farm.season || "",
@@ -66,8 +96,25 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
       setFormData(newFormData);
       setInitialized(true);
     }
-  }, [farm, initialized]);
+  }, [farm, initialized, i18n.language]);
 
+  // Update translations when language changes
+  useEffect(() => {
+    if (initialized && farm) {
+      setFormData((prev) => ({
+        ...prev,
+        areaUnit: getTranslatedAreaUnit(farm.areaUnit),
+        season: prev.season
+          ? t(`farmManagement.${prev.season.toLowerCase()}`)
+          : "",
+        currentStage: prev.currentStage
+          ? t(`farmManagement.${prev.currentStage.toLowerCase()}`)
+          : "",
+      }));
+    }
+  }, [i18n.language]);
+
+  // Reset form when dialog closes
   useEffect(() => {
     if (!open) {
       setInitialized(false);
@@ -77,7 +124,7 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
         mandal: "",
         district: "",
         totalArea: "",
-        areaUnit: "Acres",
+        areaUnit: t("farmManagement.acres"),
         cropCategory: "",
         cropType: "",
         season: "",
@@ -110,7 +157,7 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
         mandal: formData.mandal.trim(),
         district: formData.district.trim(),
         totalArea: Number(formData.totalArea),
-        areaUnit: formData.areaUnit,
+        areaUnit: getStandardAreaUnit(formData.areaUnit),
         cropType: formData.cropType,
         season: formData.season,
         currentStage: formData.currentStage,
@@ -123,7 +170,7 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
       handleClose();
     } catch (error) {
       console.error("Error updating farm:", error);
-      setError("Failed to update farm. Please try again.");
+      setError(t("farmManagement.updateError"));
     } finally {
       setLoading(false);
     }
@@ -150,14 +197,14 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
           sx: { borderRadius: 2 },
         }}
       >
-        <DialogTitle>Edit Farm</DialogTitle>
+        <DialogTitle>{t("farmManagement.editFarm")}</DialogTitle>
         <form onSubmit={handleSubmit}>
           <DialogContent>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   name="farmName"
-                  label="Farm Name"
+                  label={t("farmManagement.farmName")}
                   fullWidth
                   required
                   value={formData.farmName}
@@ -168,7 +215,7 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
               <Grid item xs={12} sm={4}>
                 <TextField
                   name="village"
-                  label="Village"
+                  label={t("farmManagement.village")}
                   fullWidth
                   required
                   value={formData.village}
@@ -179,7 +226,7 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
               <Grid item xs={12} sm={4}>
                 <TextField
                   name="mandal"
-                  label="Mandal"
+                  label={t("farmManagement.mandal")}
                   fullWidth
                   required
                   value={formData.mandal}
@@ -190,7 +237,7 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
               <Grid item xs={12} sm={4}>
                 <TextField
                   name="district"
-                  label="District"
+                  label={t("farmManagement.district")}
                   fullWidth
                   required
                   value={formData.district}
@@ -201,7 +248,7 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
               <Grid item xs={12} sm={6}>
                 <TextField
                   name="totalArea"
-                  label="Total Area"
+                  label={t("farmManagement.totalArea")}
                   type="number"
                   fullWidth
                   required
@@ -213,12 +260,12 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
 
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth required>
-                  <InputLabel>Area Unit</InputLabel>
+                  <InputLabel>{t("farmManagement.areaUnit")}</InputLabel>
                   <Select
                     name="areaUnit"
                     value={formData.areaUnit}
                     onChange={handleChange}
-                    label="Area Unit"
+                    label={t("farmManagement.areaUnit")}
                   >
                     {areaUnits.map((unit) => (
                       <MenuItem key={unit} value={unit}>
@@ -231,16 +278,16 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
 
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth required>
-                  <InputLabel>Crop Category</InputLabel>
+                  <InputLabel>{t("farmManagement.cropCategory")}</InputLabel>
                   <Select
                     name="cropCategory"
                     value={formData.cropCategory}
                     onChange={handleChange}
-                    label="Crop Category"
+                    label={t("farmManagement.cropCategory")}
                   >
                     {Object.keys(crops).map((category) => (
                       <MenuItem key={category} value={category}>
-                        {category}
+                        {t(`crops.${category}.title`)}
                       </MenuItem>
                     ))}
                   </Select>
@@ -253,17 +300,17 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
                   required
                   disabled={!formData.cropCategory}
                 >
-                  <InputLabel>Crop Type</InputLabel>
+                  <InputLabel>{t("farmManagement.cropType")}</InputLabel>
                   <Select
                     name="cropType"
                     value={formData.cropType}
                     onChange={handleChange}
-                    label="Crop Type"
+                    label={t("farmManagement.cropType")}
                   >
                     {formData.cropCategory &&
                       crops[formData.cropCategory].map((crop) => (
                         <MenuItem key={crop} value={crop}>
-                          {crop}
+                          {t(`crops.${formData.cropCategory}.${crop}`)}
                         </MenuItem>
                       ))}
                   </Select>
@@ -272,12 +319,12 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
 
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth required>
-                  <InputLabel>Season</InputLabel>
+                  <InputLabel>{t("farmManagement.season")}</InputLabel>
                   <Select
                     name="season"
                     value={formData.season}
                     onChange={handleChange}
-                    label="Season"
+                    label={t("farmManagement.season")}
                   >
                     {seasons.map((season) => (
                       <MenuItem key={season} value={season}>
@@ -290,12 +337,12 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
 
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth required>
-                  <InputLabel>Current Stage</InputLabel>
+                  <InputLabel>{t("farmManagement.currentStage")}</InputLabel>
                   <Select
                     name="currentStage"
                     value={formData.currentStage}
                     onChange={handleChange}
-                    label="Current Stage"
+                    label={t("farmManagement.currentStage")}
                   >
                     {stages.map((stage) => (
                       <MenuItem key={stage} value={stage}>
@@ -308,9 +355,11 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
             </Grid>
           </DialogContent>
           <DialogActions sx={{ px: 3, pb: 2 }}>
-            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>{t("farmManagement.cancel")}</Button>
             <Button type="submit" variant="contained" disabled={loading}>
-              {loading ? "Updating..." : "Update Farm"}
+              {loading
+                ? t("farmManagement.updating")
+                : t("farmManagement.updateFarm")}
             </Button>
           </DialogActions>
         </form>
@@ -332,7 +381,7 @@ export default function EditFarmDialog({ open, onClose, farm, onFarmUpdated }) {
             setSuccess(false);
           }}
         >
-          {error || "Farm updated successfully!"}
+          {error || t("farmManagement.farmUpdated")}
         </Alert>
       </Snackbar>
     </>

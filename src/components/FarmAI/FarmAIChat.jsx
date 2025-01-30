@@ -12,8 +12,11 @@ import {
 import { Send as SendIcon } from "@mui/icons-material";
 import { getAIResponse } from "../../services/aiService";
 import { promptTemplates } from "../../constants/aiPrompts";
+import { useTranslation } from "react-i18next";
 
 export default function FarmAIChat() {
+  const { t } = useTranslation();
+
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -83,10 +86,10 @@ export default function FarmAIChat() {
   };
 
   const examplePrompts = [
-    "What crops are suitable for sandy soil in summer?",
-    "Recommend fertilizers for rice cultivation",
-    "How to prevent tomato leaf diseases?",
-    "Best practices for organic farming",
+    `${t("farmAI.examplePrompt1")}`,
+    `${t("farmAI.examplePrompt2")}`,
+    `${t("farmAI.examplePrompt3")}`,
+    `${t("farmAI.examplePrompt4")}`,
   ];
 
   return (
@@ -97,7 +100,7 @@ export default function FarmAIChat() {
           flexGrow: 1,
           overflowY: "auto",
           p: 2,
-          bgcolor: "grey.50",
+          bgcolor: "background.chat",
           borderRadius: 1,
           mb: 2,
         }}
@@ -106,7 +109,7 @@ export default function FarmAIChat() {
         {messages.length === 0 && (
           <Box sx={{ p: 2 }}>
             <Typography color="text.secondary" gutterBottom>
-              Try asking about:
+              {t("farmAI.tryAsking")}:
             </Typography>
             <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
               {examplePrompts.map((prompt, index) => (
@@ -157,7 +160,7 @@ export default function FarmAIChat() {
         <TextField
           fullWidth
           variant="outlined"
-          placeholder="Ask anything about farming..."
+          placeholder={t("farmAI.askAnything")}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={(e) => e.key === "Enter" && handleSend()}

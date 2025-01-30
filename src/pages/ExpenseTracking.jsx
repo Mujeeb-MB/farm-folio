@@ -25,6 +25,7 @@ import ExpenseFilterBar from "../components/Expenses/ExpenseFilterBar";
 // import ExpenseAnalysis from "../components/Expenses/ExpenseAnalysis";
 import ExpensePrintView from "../components/Expenses/ExpensePrintView";
 import { exportToExcel } from "../utils/exportToExcel";
+import { useTranslation } from "react-i18next";
 
 export default function ExpenseTracking() {
   const { currentUser } = useAuth();
@@ -43,6 +44,7 @@ export default function ExpenseTracking() {
     sortBy: "date",
   });
 
+  const { t } = useTranslation();
   // Fetch farms on component mount
   useEffect(() => {
     const fetchFarms = async () => {
@@ -153,7 +155,7 @@ export default function ExpenseTracking() {
         }}
       >
         <Typography variant="h5" fontWeight="600">
-          Expense Tracking
+          {t("expense.heading")}
         </Typography>
         <Box>
           {selectedFarm && expenses.length > 0 && (
@@ -163,10 +165,10 @@ export default function ExpenseTracking() {
                 onClick={() => setPrintViewOpen(true)}
                 sx={{ mr: 1 }}
               >
-                Print Report
+                {t("expense.printReport")}
               </Button>
               <Button variant="outlined" onClick={handleExport} sx={{ mr: 2 }}>
-                Export to Excel
+                {t("expense.exportReport")}
               </Button>
             </>
           )}
@@ -176,7 +178,7 @@ export default function ExpenseTracking() {
             onClick={() => setOpenAddDialog(true)}
             disabled={!selectedFarm}
           >
-            Add Expense
+            {t("expense.addExpense")}
           </Button>
         </Box>
       </Box>
@@ -193,14 +195,14 @@ export default function ExpenseTracking() {
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12} md={6}>
               <FormControl fullWidth>
-                <InputLabel>Select Farm</InputLabel>
+                <InputLabel>{t("expense.selectFarm")}</InputLabel>
                 <Select
                   value={selectedFarm}
                   onChange={handleFarmChange}
-                  label="Select Farm"
+                  label={t("expense.selectFarm")}
                 >
                   <MenuItem value="">
-                    <em>Select a farm</em>
+                    <em>{t("expense.selectAFarm")}</em>
                   </MenuItem>
                   {farms.map((farm) => (
                     <MenuItem key={farm.id} value={farm.id}>
@@ -255,7 +257,7 @@ export default function ExpenseTracking() {
         <Card sx={{ textAlign: "center", py: 5 }}>
           <CardContent>
             <Typography color="text.secondary">
-              Please select a farm to view expenses
+              {t("expense.pleaseSelectFarm")}
             </Typography>
           </CardContent>
         </Card>

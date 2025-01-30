@@ -21,6 +21,7 @@
     "back": "Back",
     "next": "Next"
   },
+
   "hero": {
     "welcome": "Welcome to",
     "title": "FarmFolio",
@@ -94,74 +95,182 @@
     "dontHaveAccount": "Don't have an account?",
     "signUp": "Sign up now"
 },
-  "auth": {
-    "welcomeBack": "Welcome Back",
-    "createAccount": "Create Account",
-    "forgotPassword": "Forgot Password?",
-    "resetPassword": "Reset Password",
-    "email": "Email",
-    "password": "Password",
-    "confirmPassword": "Confirm Password",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "orContinueWith": "Or continue with",
-    "alreadyHaveAccount": "Already have an account?",
-    "dontHaveAccount": "Don't have an account?",
-    "signInHere": "Sign in here",
-    "signUpHere": "Sign up here",
-    "googleSignIn": "Continue with Google"
-  },
 
   "nav": {
-    "dashboard": "Dashboard",
-    "farmManagement": "Farm Management",
-    "expenseTracking": "Expense Tracking",
-    "reports": "Reports & Analytics",
-    "farmAI": "FarmAI",
     "settings": "Settings",
     "profile": "Profile",
-    "help": "Need Help?"
+    "privacy": "Privacy Policy",
+    "signout": "Sign Out"
+  },
+
+  "sidebar":{
+    "dashboard": "Dashboard",
+    "farmManagement": "Farm Management",
+    "expenseTracking": "Expenses Tracking",
+    "reportsAnalytics": "Reports & Analytics",
+    "farmAI": "FarmAI",
+    "needHelp": "Need Help?"
   },
 
   "dashboard": {
-    "welcome": "Welcome to FarmFolio",
+    "heading": "Dashboard",
     "totalFarms": "Total Farms",
     "totalExpenses": "Total Expenses",
-    "recentExpenses": "Recent Expenses",
-    "quickStats": "Quick Stats",
-    "farmSummary": "Farm Summary",
-    "expenseOverview": "Expense Overview",
     "pendingPayments": "Pending Payments",
-    "paidAmount": "Paid Amount"
+    "paidAmount": "Paid Amount",
+    "farmSummary": "Farm Summary",
+    "noFarm": "No farms added yet",
+    "expenseOverview": {
+      "title": "Expense Overview",
+      "month": "Month",
+      "paid": "Paid",
+      "pending": "Pending"
+    },
+    "recentExpenses":{
+      "title": "Recent Expenses",
+      "date": "Date",
+      "farm": "Farm",
+      "category": "Category",
+      "description": "Description",
+      "amount": "Amount",
+      "status": "Status",
+      "noExpenses": "No recent expenses"
+    },
+    "quickStats": "Quick Stats"
   },
 
-  "farm": {
+  "farmManagement": {
+    "heading": "Farm Management",
     "addFarm": "Add Farm",
+    "farmFilter":{
+      "allSeasons": "All Seasons",
+      "kharif": "Kharif",
+      "rabi": "Rabi",
+      "zaid": "Zaid",
+      "searchFarm": "Search Farm",
+      "cropCategory": "Crop Category",
+      "season": "Season",
+      "allCategories": "All Categories"
+    },
+    "storeBy": "Store by",
+    "dateAdded": "Date Added",
     "editFarm": "Edit Farm",
     "deleteFarm": "Delete Farm",
+    "area": "Area",
+    "noFarmsAdded": "No farms added yet",
+    "noFarmsMatch": "No farms match your filters",
+    "addFirstFarm": "Add your first farm",
+    "addNewFarm": "Add New Farm",
     "farmName": "Farm Name",
-    "location": "Location",
     "village": "Village",
     "mandal": "Mandal",
     "district": "District",
-    "area": "Area",
+    "totalArea": "Total Area",
     "areaUnit": "Area Unit",
     "acres": "Acres",
     "guntas": "Guntas",
+    "cropCategory": "Crop Category",
     "cropType": "Crop Type",
     "season": "Season",
+    "kharif": "Kharif",
+    "rabi": "Rabi",
+    "zaid": "Zaid",
     "currentStage": "Current Stage",
+    "landPreparation": "Land Preparation",
+    "sowing": "Sowing",
+    "growing": "Growing",
+    "harvesting": "Harvesting",
     "status": "Status",
     "active": "Active",
     "inactive": "Inactive",
+    "location": "Location",
+    "cancel": "Cancel",
+    "adding": "Adding...", 
     "deleteConfirm": "Are you sure you want to delete this farm?",
     "farmAdded": "Farm added successfully",
+    "updating": "Updating...", 
+    "updateFarm": "Update Farm",
     "farmUpdated": "Farm updated successfully",
     "farmDeleted": "Farm deleted successfully"
   },
 
+  "crops": {
+    "cereals": {
+      "title": "Cereals",
+      "paddy": "Paddy (Rice)",
+      "wheat": "Wheat",
+      "jowar": "Jowar (Sorghum)",
+      "bajra": "Bajra (Pearl Millet)",
+      "ragi": "Ragi (Finger Millet)",
+      "maize": "Maize (Corn)"
+    },
+    "pulses": {
+      "title": "Pulses",
+      "redGram": "Red Gram (Tur/Arhar)",
+      "blackGram": "Black Gram (Urad)",
+      "greenGram": "Green Gram (Moong)",
+      "bengalGram": "Bengal Gram (Chana)",
+      "horseGram": "Horse Gram",
+      "cowpea": "Cowpea"
+    },
+    "oilseeds": {
+      "title": "Oilseeds",
+      "groundnut": "Groundnut",
+      "sunflower": "Sunflower",
+      "sesame": "Sesame (Til)",
+      "soybean": "Soybean",
+      "mustard": "Mustard",
+      "castor": "Castor"
+    },
+    "commercial": {
+      "title": "Commercial Crops",
+      "cotton": "Cotton",
+      "sugarcane": "Sugarcane",
+      "tobacco": "Tobacco",
+      "jute": "Jute"
+    },
+    "vegetables": {
+      "title": "Vegetables",
+      "tomato": "Tomato",
+      "onion": "Onion",
+      "potato": "Potato",
+      "brinjal": "Brinjal",
+      "okra": "Okra (Bhindi)",
+      "cabbage": "Cabbage",
+      "cauliflower": "Cauliflower",
+      "carrot": "Carrot",
+      "greenChilli": "Green Chilli",
+      "cucumber": "Cucumber"
+    },
+    "fruits": {
+      "title": "Fruits",
+      "mango": "Mango",
+      "banana": "Banana",
+      "grapes": "Grapes",
+      "pomegranate": "Pomegranate",
+      "papaya": "Papaya",
+      "orange": "Orange",
+      "guava": "Guava",
+      "watermelon": "Watermelon"
+    },
+    "spices": {
+      "title": "Spices",
+      "turmeric": "Turmeric",
+      "chilli": "Chilli",
+      "ginger": "Ginger",
+      "cardamom": "Cardamom",
+      "blackPepper": "Black Pepper",
+      "coriander": "Coriander"
+    }
+  },
+
   "expense": {
+    "heading": "Expense Tracking",
+    "printReport":"Print Report",
+    "exportReport":"Export to Excel",
     "addExpense": "Add Expense",
+    "selectFarm": "Select Farm",
+    "selectAFarm": "Select a Farm",
     "editExpense": "Edit Expense",
     "deleteExpense": "Delete Expense",
     "category": "Category",
@@ -171,8 +280,6 @@
     "description": "Description",
     "paymentStatus": "Payment Status",
     "paymentMode": "Payment Mode",
-    "paid": "Paid",
-    "pending": "Pending",
     "cash": "Cash",
     "upi": "UPI",
     "bankTransfer": "Bank Transfer",
@@ -180,47 +287,182 @@
     "expenseAdded": "Expense added successfully",
     "expenseUpdated": "Expense updated successfully",
     "expenseDeleted": "Expense deleted successfully",
-    "categories": {
-      "seeds": "Seeds",
-      "fertilizers": "Fertilizers",
-      "pesticides": "Pesticides",
-      "labor": "Labor",
-      "equipment": "Equipment",
-      "irrigation": "Irrigation",
-      "transportation": "Transportation",
-      "others": "Others"
+    "pleaseSelectFarm":"Please select a farm to view expenses",
+    "expenseFilter":{
+      "fromDate": "From Date",
+      "toDate": "To Date",
+      "category": "Category",
+      "allCategories": "All Categories",
+      "allStatus": "All Status",
+      "sortBy": "Sort By",
+      "date": "Date",
+      "amount": "Amount",
+      "clearFilters": "Clear Filters"
+    },
+  "categories": {
+      "seeds": {
+        "title": "Seeds",
+        "cropSeeds": "Crop Seeds",
+        "hybridSeeds": "Hybrid Seeds",
+        "organicSeeds": "Organic Seeds"
+      },
+      "fertilizers": {
+        "title": "Fertilizers",
+        "organicFertilizers": "Organic Fertilizers",
+        "chemicalFertilizers": "Chemical Fertilizers",
+        "bioFertilizers": "Bio Fertilizers"
+      },
+      "labor": {
+        "title": "Labor",
+        "landPreparation": "Land Preparation",
+        "sowing": "Sowing",
+        "weeding": "Weeding",
+        "harvesting": "Harvesting",
+        "dailyWages": "Daily Wages"
+      },
+      "equipment": {
+        "title": "Equipment",
+        "machineryRent": "Machinery Rent",
+        "toolsPurchase": "Tools Purchase",
+        "maintenance": "Maintenance"
+      },
+      "pesticides": {
+        "title": "Pesticides",
+        "insecticides": "Insecticides",
+        "fungicides": "Fungicides",
+        "weedicides": "Weedicides"
+      },
+      "irrigation": {
+        "title": "Irrigation",
+        "waterCharges": "Water Charges",
+        "fuelCharges": "Fuel Charges",
+        "equipmentMaintenance": "Equipment Maintenance"
+      },
+      "transportation": {
+        "title": "Transportation",
+        "vehicleRent": "Vehicle Rent",
+        "fuel": "Fuel",
+        "loadingUnloading": "Loading/Unloading"
+      },
+      "others": {
+        "title": "Others",
+        "miscellaneous": "Miscellaneous"
+      }
+    },
+    "paymentStatusFilter": {
+      "paid": "Paid",
+      "pending": "Pending"
+    },
+    "paymentModeFilter": {
+      "cash": "Cash",
+      "upi": "UPI",
+      "bankTransfer": "Bank Transfer",
+      "credit": "Credit"
+    },
+    "expenseSummary":{
+      "totalExpenses" : "Total Expenses",
+      "paidAmount":"Paid Amount",
+      "pendingAmount": "Pending Amount",
+      "categoryExpense": "Category-wise Expense"
+    },
+
+    "expenseTable":{
+      "date": "Date",
+      "category":"Category",
+      "subCategory":"Sub Category",
+      "description":"Description",
+      "amount":"Amount",
+      "paymentStatus":"Payment Status",
+      "paymentMode":"Payment Mode",
+      "actions": "Actions",
+      "paid": "Paid",
+      "pending": "Pending",
+      "noExpenses":"No expenses found",
+      "edit":"Edit",
+      "delete":"Delete"
+    },
+    "addExpenses":{
+      "paid": "Paid",
+      "pending": "Pending",
+      "cash":"Cash",
+      "addNewExpense":"Add New Expense",
+      "category":"Category",
+      "subCategory":"Sub Category",
+      "amount":"Amount",
+      "date":"Date",
+      "paymentStatus":"Payment Status",
+      "paymentMode":"Payment Mode",
+      "description":"Description",
+      "cancel":"Cancel",
+      "adding":"Adding...",
+      "addExpense":"Add Expense",
+      "expenseAdded":"Expense added successfully"
+    },
+    "expensePrint":{
+      "expenseReport":"Expense Report",
+      "totalExpenses":"Total Expenses",
+      "date":"Date",
+      "category":"Category",
+      "description":"Description",
+      "amount":"Amount",
+      "status":"Status",
+      "close": "Close",
+      "print":"Print"
     }
   },
 
+
   "reports": {
+    "reportsAnalytics":"Reports & Analytics",
+    "selectFarm":"Select Farm",
+    "selectAFarm":"Select a Farm",
     "expenseAnalysis": "Expense Analysis",
-    "categoryAnalysis": "Category Analysis",
-    "monthlyTrends": "Monthly Trends",
+    "categoryDistribution": "Category Distribution",
+    "amount":"Amount",
+    "percentage":"Percentage",
+    "count":"Count",
+    "categoryAnalysis":"Category-wise Analysis",
+    "category":"Category",
     "paymentAnalysis": "Payment Analysis",
-    "exportReport": "Export Report",
-    "printReport": "Print Report",
-    "filterByDate": "Filter by Date",
-    "filterByCategory": "Filter by Category",
-    "filterByStatus": "Filter by Status",
-    "from": "From",
-    "to": "To",
+    "paymentStatus":"Payment Status Distribution",
+    "paymentMode":"Payment Mode Distribution",
+    "monthlyStatusTrends":"Monthly Status Trend",
+    "paymentType":"Payment Type",
     "total": "Total",
-    "average": "Average",
-    "highest": "Highest",
-    "lowest": "Lowest"
+    "average": "Avg/Expense",
+    "monthlyTrends": "Monthly Trends",
+    "viewType":"View Type",
+    "areaChart":"Area Chart",
+    "lineChart":"Line Chart",
+    "timeFrame":"Time Frame",
+    "months":"Months",
+    "averagMonthlyExp":"Average Monthly Expense",
+    "highestMonthlyExp":"Hisghest Monthly Expense",
+    "totalMonthlyExp":"Total Expense (Period)",
+    "noExpenses":"No expenses found for the selected farm.",
+    "pleaseSelectFarm":"Please select a farm to view analytics."
   },
 
   "farmAI": {
     "assistant": "FarmAI Assistant",
-    "chat": "AI Chat",
+    "chat": "FarmAI Chat",
     "diseaseDetection": "Disease Detection",
+    "chatDesc":"Get AI assistance for crop planning, fertilizers, and farming advice",
+    "diseaseDetectionDesc":"Upload plant images to detect diseases and get treatment suggestions",
+    "comingSoon":"Disease Detection Coming Soon",
+    "tryAsking":"Try asking about",
     "askAnything": "Ask anything about farming...",
     "uploadImage": "Upload Image",
     "takePhoto": "Take Photo",
     "analyzing": "Analyzing...",
     "suggestions": "Suggestions",
     "treatment": "Treatment",
-    "prevention": "Prevention"
+    "prevention": "Prevention",
+    "examplePrompt1":"What crops are suitable for sandy soil in summer?",
+    "examplePrompt2":"Recommend fertilizers for rice cultivation",
+    "examplePrompt3":"How to prevent tomato leaf diseases?",
+    "examplePrompt4":"Best practices for organic farming"
+
   },
 
   "errors": {

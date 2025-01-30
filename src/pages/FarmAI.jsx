@@ -8,32 +8,33 @@ import {
 
 // We'll create these components
 import FarmAIChat from "../components/FarmAI/FarmAIChat";
+import { useTranslation } from "react-i18next";
 // import DiseaseDetection from "../components/FarmAI/DiseaseDetection";
 
 export default function FarmAI() {
+  const { t } = useTranslation();
+
   const [activeTab, setActiveTab] = useState("chat");
 
   const tabs = [
     {
       value: "chat",
-      label: "FarmAI Chat",
+      label: `${t("farmAI.chat")}`,
       icon: ChatIcon,
-      description:
-        "Get AI assistance for crop planning, fertilizers, and farming advice",
+      description: `${t("farmAI.chatDesc")}`,
     },
     {
       value: "disease",
-      label: "Disease Detection",
+      label: `${t("farmAI.diseaseDetection")}`,
       icon: DiseaseIcon,
-      description:
-        "Upload plant images to detect diseases and get treatment suggestions",
+      description: `${t("farmAI.diseaseDetectionDesc")}`,
     },
   ];
 
   return (
     <Box>
       <Typography variant="h5" fontWeight="600" gutterBottom>
-        FarmAI Assistant
+        {t("farmAI.assistant")}
       </Typography>
 
       <Card>
@@ -62,7 +63,7 @@ export default function FarmAI() {
             {activeTab === "chat" && <FarmAIChat />}
             {activeTab === "disease" && (
               // <DiseaseDetection />
-              <Typography>Disease Detection Coming Soon</Typography>
+              <Typography>{t("farmAI.comingSoon")}</Typography>
             )}
           </Box>
         </CardContent>

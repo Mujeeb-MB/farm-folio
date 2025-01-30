@@ -30,9 +30,12 @@ import AddFarmDialog from "../components/Farms/AddFarmDialog";
 import EditFarmDialog from "../components/Farms/EditFarmDialog";
 import FarmCard from "../components/Farms/FarmCard";
 import FarmFilters from "../components/Farms/FarmFilters";
-import { crops } from "../constants/crops";
+import { CropsComponent } from "../constants/crops";
+import { useTranslation } from "react-i18next";
 
 export default function FarmManagement() {
+  const crops = CropsComponent();
+
   const { currentUser } = useAuth();
   const [openAddDialog, setOpenAddDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -46,6 +49,8 @@ export default function FarmManagement() {
     season: "",
   });
   const [sortBy, setSortBy] = useState("farmName");
+
+  const { t } = useTranslation();
 
   const fetchFarms = async () => {
     try {
@@ -125,14 +130,14 @@ export default function FarmManagement() {
         }}
       >
         <Typography variant="h5" fontWeight="600">
-          Farm Management
+          {t("farmManagement.heading")}
         </Typography>
         <Button
           variant="contained"
           startIcon={<AddIcon />}
           onClick={() => setOpenAddDialog(true)}
         >
-          Add Farm
+          {t("farmManagement.addFarm")}
         </Button>
       </Box>
 
@@ -156,15 +161,17 @@ export default function FarmManagement() {
 
       <Box sx={{ mb: 3 }}>
         <FormControl size="small" sx={{ minWidth: 200 }}>
-          <InputLabel>Sort By</InputLabel>
+          <InputLabel>{t("farmManagement.storeBy")}</InputLabel>
           <Select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            label="Sort By"
+            label={t("farmManagement.storeBy")}
           >
-            <MenuItem value="farmName">Farm Name</MenuItem>
-            <MenuItem value="createdAt">Date Added</MenuItem>
-            <MenuItem value="totalArea">Area</MenuItem>
+            <MenuItem value="farmName">{t("farmManagement.farmName")}</MenuItem>
+            <MenuItem value="createdAt">
+              {t("farmManagement.dateAdded")}
+            </MenuItem>
+            <MenuItem value="totalArea">{t("farmManagement.area")}</MenuItem>
           </Select>
         </FormControl>
       </Box>
@@ -176,8 +183,8 @@ export default function FarmManagement() {
               <CardContent>
                 <Typography color="text.secondary" mb={2}>
                   {farms.length === 0
-                    ? "No farms added yet"
-                    : "No farms match your filters"}
+                    ? `${t("farmManagement.noFarmsAdded")}`
+                    : `${t("farmManagement.noFarmsMatch")}`}
                 </Typography>
                 {farms.length === 0 && (
                   <Button
@@ -185,7 +192,7 @@ export default function FarmManagement() {
                     startIcon={<AddIcon />}
                     onClick={() => setOpenAddDialog(true)}
                   >
-                    Add Your First Farm
+                    {t("farmManagement.addFirstFarm")}
                   </Button>
                 )}
               </CardContent>

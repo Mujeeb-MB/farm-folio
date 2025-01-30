@@ -13,8 +13,10 @@ import {
   Chip,
   Box,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export default function RecentExpenses({ expenses }) {
+  const { t } = useTranslation();
   const formatDate = (timestamp) => {
     if (!timestamp) return "-";
     const date = timestamp.toDate();
@@ -48,19 +50,23 @@ export default function RecentExpenses({ expenses }) {
     <Card>
       <CardContent>
         <Typography variant="h6" gutterBottom>
-          Recent Expenses
+          {t("dashboard.recentExpenses.title")}
         </Typography>
 
         <TableContainer>
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell>Farm</TableCell>
-                <TableCell>Category</TableCell>
-                <TableCell>Description</TableCell>
-                <TableCell align="right">Amount</TableCell>
-                <TableCell>Status</TableCell>
+                <TableCell>{t("dashboard.recentExpenses.date")}</TableCell>
+                <TableCell>{t("dashboard.recentExpenses.farm")}</TableCell>
+                <TableCell>{t("dashboard.recentExpenses.category")}</TableCell>
+                <TableCell>
+                  {t("dashboard.recentExpenses.description")}
+                </TableCell>
+                <TableCell align="right">
+                  {t("dashboard.recentExpenses.amount")}
+                </TableCell>
+                <TableCell>{t("dashboard.recentExpenses.status")}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -98,7 +104,7 @@ export default function RecentExpenses({ expenses }) {
                 <TableRow>
                   <TableCell colSpan={6} align="center">
                     <Typography color="text.secondary">
-                      No recent expenses
+                      {t("dashboard.recentExpenses.noExpenses")}
                     </Typography>
                   </TableCell>
                 </TableRow>

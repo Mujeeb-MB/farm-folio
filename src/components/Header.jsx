@@ -16,11 +16,9 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useTheme as useColorTheme } from "../context/ThemeContext";
-import {
-  Brightness4,
-  Brightness7,
-  Menu as MenuIcon,
-} from "@mui/icons-material";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import MenuIcon from "@mui/icons-material/Menu";
 
 import LanguageSwitcher from "./common/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
@@ -97,7 +95,7 @@ export default function Header() {
                     color: darkMode ? "white" : "black",
                   }}
                 >
-                  {darkMode ? <Brightness7 /> : <Brightness4 />}
+                  {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
                 </IconButton>
               </Tooltip>
               <Button
@@ -130,6 +128,7 @@ export default function Header() {
           {/* Mobile View */}
           {isMobile && (
             <Box>
+              <LanguageSwitcher />
               <IconButton
                 size="large"
                 onClick={handleMenuOpen}
@@ -170,7 +169,7 @@ export default function Header() {
                           color: darkMode ? "white" : "black",
                         }}
                       >
-                        {darkMode ? <Brightness7 /> : <Brightness4 />}
+                        {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
                       </IconButton>
                     </Tooltip>
                   </Box>

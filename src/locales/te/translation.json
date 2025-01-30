@@ -94,74 +94,181 @@
     "signUp": "ఇప్పుడు సైన్ అప్ చేయండి"
 },
 
-  "auth": {
-    "welcomeBack": "తిరిగి స్వాగతం",
-    "createAccount": "ఖాతా సృష్టించండి",
-    "forgotPassword": "పాస్‌వర్డ్ మరచిపోయారా?",
-    "resetPassword": "పాస్‌వర్డ్ రీసెట్ చేయండి",
-    "email": "ఇమెయిల్",
-    "password": "పాస్‌వర్డ్",
-    "confirmPassword": "పాస్‌వర్డ్ నిర్ధారించండి",
-    "firstName": "మొదటి పేరు",
-    "lastName": "చివరి పేరు",
-    "orContinueWith": "లేదా కొనసాగించండి",
-    "alreadyHaveAccount": "ఇప్పటికే ఖాతా ఉందా?",
-    "dontHaveAccount": "ఖాతా లేదా?",
-    "signInHere": "ఇక్కడ లాగిన్ చేయండి",
-    "signUpHere": "ఇక్కడ సైన్ అప్ చేయండి",
-    "googleSignIn": "Google తో కొనసాగించండి"
+  "nav": {
+    "settings": "సెట్టింగ్స్",
+    "profile": "ప్రొఫైల్",
+    "privacy": "గోప్యతా విధానం",
+    "signout": "సైన్ అవుట్"
   },
 
-  "nav": {
+  "sidebar": {
     "dashboard": "డాష్‌బోర్డ్",
-    "farmManagement": "వ్యవసాయ నిర్వహణ",
+    "farmManagement": "పొలం నిర్వహణ",
     "expenseTracking": "ఖర్చుల ట్రాకింగ్",
-    "reports": "నివేదికలు & విశ్లేషణ",
+    "reportsAnalytics": "నివేదికలు & విశ్లేషణలు",
     "farmAI": "ఫార్మ్ AI",
-    "settings": "సెట్టింగ్‌లు",
-    "profile": "ప్రొఫైల్",
-    "help": "సహాయం కావాలా?"
+    "needHelp": "సహాయం కావాలా?"
   },
 
   "dashboard": {
-    "welcome": "ఫార్మ్‌ఫోలియోకి స్వాగతం",
+    "heading": "డాష్‌బోర్డ్",
     "totalFarms": "మొత్తం పొలాలు",
     "totalExpenses": "మొత్తం ఖర్చులు",
-    "recentExpenses": "ఇటీవలి ఖర్చులు",
-    "quickStats": "త్వరిత గణాంకాలు",
-    "farmSummary": "పొలం సారాంశం",
-    "expenseOverview": "ఖర్చుల అవలోకనం",
     "pendingPayments": "పెండింగ్ చెల్లింపులు",
-    "paidAmount": "చెల్లించిన మొత్తం"
+    "paidAmount": "చెల్లించిన మొత్తం",
+    "farmSummary": "పొలం సారాంశం",
+    "noFarm": "ఇంకా పొలాలు జోడించలేదు",
+    "expenseOverview": {
+      "title": "ఖర్చుల అవలోకనం",
+      "month": "నెల",
+      "paid": "చెల్లించబడింది",
+      "pending": "పెండింగ్"
+    },
+    "recentExpenses": {
+      "title": "ఇటీవలి ఖర్చులు",
+      "date": "తేదీ",
+      "farm": "పొలం",
+      "category": "వర్గం",
+      "description": "వివరణ",
+      "amount": "మొత్తం",
+      "status": "స్థితి",
+      "noExpenses": "ఇటీవలి ఖర్చులు లేవు"
+    },
+    "quickStats": "త్వరిత గణాంకాలు"
   },
 
-  "farm": {
-    "addFarm": "పొలం జోడించండి",
-    "editFarm": "పొలం సవరించండి",
-    "deleteFarm": "పొలం తొలగించండి",
-    "farmName": "పొలం పేరు",
-    "location": "స్థలం",
-    "village": "గ్రామం",
-    "mandal": "మండలం",
-    "district": "జిల్లా",
-    "area": "విస్తీర్ణం",
-    "areaUnit": "విస్తీర్ణ యూనిట్",
-    "acres": "ఎకరాలు",
-    "guntas": "గుంటలు",
-    "cropType": "పంట రకం",
+"farmManagement": {
+  "heading": "పొలం నిర్వహణ",
+  "addFarm": "పొలం జోడించండి",
+  "farmFilter": {
+    "allSeasons": "అన్ని సీజన్లు",
+    "kharif": "ఖరీఫ్",
+    "rabi": "రబీ",
+    "zaid": "జైద్",
+    "searchFarm": "పొలం వెతకండి",
+    "cropCategory": "పంట వర్గం",
     "season": "సీజన్",
-    "currentStage": "ప్రస్తుత దశ",
-    "status": "స్థితి",
-    "active": "యాక్టివ్",
-    "inactive": "ఇన్‌యాక్టివ్",
-    "deleteConfirm": "మీరు ఖచ్చితంగా ఈ పొలాన్ని తొలగించాలనుకుంటున్నారా?",
-    "farmAdded": "పొలం విజయవంతంగా జోడించబడింది",
-    "farmUpdated": "పొలం విజయవంతంగా నవీకరించబడింది",
-    "farmDeleted": "పొలం విజయవంతంగా తొలగించబడింది"
+    "allCategories": "అన్ని వర్గాలు"
+  },
+  "storeBy": "ద్వారా నిల్వ చేయండి",
+  "dateAdded": "జోడించిన తేదీ",
+  "editFarm": "పొలం సవరించండి",
+  "deleteFarm": "పొలం తొలగించండి",
+  "area": "ప్రాంతం",
+  "noFarmsAdded": "ఇంకా పొలాలు జోడించలేదు",
+  "noFarmsMatch": "మీ వడపోతలకు సరిపోలే పొలాలు లేవు",
+  "addFirstFarm": "మీ మొదటి పొలం జోడించండి",
+  "addNewFarm": "కొత్త పొలం జోడించండి",
+  "farmName": "పొలం పేరు",
+  "village": "గ్రామం",
+  "mandal": "మండలం",
+  "district": "జిల్లా",
+  "totalArea": "మొత్తం ప్రాంతం",
+  "areaUnit": "ప్రాంతం యూనిట్",
+  "acres": "ఎకరాలు",
+  "guntas": "గుంటలు",
+  "cropCategory": "పంట వర్గం",
+  "cropType": "పంట రకం",
+  "season": "సీజన్",
+  "kharif": "ఖరీఫ్",
+  "rabi": "రబీ",
+  "zaid": "జైద్",
+  "currentStage": "ప్రస్తుత దశ",
+  "landPreparation": "భూమి తయారీ",
+  "sowing": "విత్తనాలు వేయడం",
+  "growing": "పెరుగుదల",
+  "harvesting": "పంట కోత",
+  "status": "స్థితి",
+  "active": "క్రియాశీల",
+  "inactive": "క్రియాశీలం కాదు",
+  "location": "స్థానం",
+  "cancel": "రద్దు చేయండి",
+  "adding": "జోడిస్తోంది...",
+  "deleteConfirm": "మీరు ఈ పొలాన్ని తొలగించాలనుకుంటున్నారా?",
+  "farmAdded": "పొలం విజయవంతంగా జోడించబడింది",
+  "updating": "నవీకరిస్తోంది...",
+  "updateFarm": "పొలం నవీకరించండి",
+  "farmUpdated": "పొలం విజయవంతంగా నవీకరించబడింది",
+  "farmDeleted": "పొలం విజయవంతంగా తొలగించబడింది"
+  },
+
+  "crops": {
+  "cereals": {
+    "title": "ధాన్యాలు",
+    "paddy": "ప్యాడీ (బియ్యం)",
+    "wheat": "గోధుమ",
+    "jowar": "జొన్న (సోర్గమ్)",
+    "bajra": "బాజ్రా (పెర్ల్ మిల్లెట్)",
+    "ragi": "రాగి (ఫింగర్ మిల్లెట్)",
+    "maize": "మొక్కజొన్న (కార్న్)"
+  },
+  "pulses": {
+    "title": "పప్పులు",
+    "redGram": "ఎర్ర గ్రమ్ (తుర/అర్హర్)",
+    "blackGram": "నల్ల గ్రమ్ (ఉరద్)",
+    "greenGram": "పచ్చ గ్రమ్ (మూంగ్)",
+    "bengalGram": "బెంగాల్ గ్రమ్ (చనా)",
+    "horseGram": "గొర్రె గ్రమ్",
+    "cowpea": "కోవ్‌పా"
+  },
+  "oilseeds": {
+    "title": "నూనె గింజలు",
+    "groundnut": "వేరుశెనగ",
+    "sunflower": "సూర్యకాంతి",
+    "sesame": "నువ్వులు (తిల్)",
+    "soybean": "సోయాబీన్",
+    "mustard": "ఆవాలు",
+    "castor": "ఆముదం"
+  },
+  "commercial": {
+    "title": "వాణిజ్య పంటలు",
+    "cotton": "పత్తి",
+    "sugarcane": "చెరకు",
+    "tobacco": "పొగాకు",
+    "jute": "జూట్"
+  },
+  "vegetables": {
+    "title": "కూరగాయలు",
+    "tomato": "టమోటా",
+    "onion": "ఉల్లిపాయ",
+    "potato": "బంగాళాదుంప",
+    "brinjal": "వంకాయ",
+    "okra": "బెండకాయ",
+    "cabbage": "క్యాబేజీ",
+    "cauliflower": "కాలీఫ్లవర్",
+    "carrot": "క్యారెట్",
+    "greenChilli": "పచ్చి మిరపకాయ",
+    "cucumber": "దోసకాయ"
+  },
+  "fruits": {
+    "title": "పండ్లు",
+    "mango": "మామిడి",
+    "banana": "అరటి",
+    "grapes": "ద్రాక్ష",
+    "pomegranate": "దానిమ్మ",
+    "papaya": "బొప్పాయి",
+    "orange": "నారింజ",
+    "guava": "జామ",
+    "watermelon": "పుచ్చకాయ"
+  },
+  "spices": {
+    "title": "మసాలా దినుసులు",
+    "turmeric": "పసుపు",
+    "chilli": "మిరపకాయ",
+    "ginger": "అల్లం",
+    "cardamom": "ఏలకులు",
+    "blackPepper": "నల్ల మిరియాలు",
+    "coriander": "ధనియాలు"
+  }
   },
 
   "expense": {
+    "heading": "ఖర్చుల ట్రాకింగ్",
+    "printReport": "నివేదిక ముద్రణ",
+    "exportReport": "ఎక్సెల్‌కు ఎగుమతి",
     "addExpense": "ఖర్చు జోడించండి",
+    "selectFarm": "పొలం ఎంచుకోండి",
+    "selectAFarm": "ఒక పొలం ఎంచుకోండి",
     "editExpense": "ఖర్చు సవరించండి",
     "deleteExpense": "ఖర్చు తొలగించండి",
     "category": "వర్గం",
@@ -170,56 +277,187 @@
     "date": "తేదీ",
     "description": "వివరణ",
     "paymentStatus": "చెల్లింపు స్థితి",
-    "paymentMode": "చెల్లింపు విధానం",
-    "paid": "చెల్లించబడింది",
-    "pending": "పెండింగ్",
+    "paymentMode": "చెల్లింపు మోడ్",
     "cash": "నగదు",
     "upi": "UPI",
     "bankTransfer": "బ్యాంక్ ట్రాన్స్‌ఫర్",
     "credit": "క్రెడిట్",
+    "expenseAdded": "ఖర్చు విజయవంతంగా జోడించబడింది",
+    "expenseUpdated": "ఖర్చు విజయవంతంగా నవీకరించబడింది",
+    "expenseDeleted": "ఖర్చు విజయవంతంగా తొలగించబడింది",
+    "pleaseSelectFarm": "ఖర్చులను చూడటానికి దయచేసి ఒక పొలం ఎంచుకోండి",
+    "expenseFilter": {
+      "fromDate": "తేదీ నుండి",
+      "toDate": "తేదీ వరకు",
+      "category": "వర్గం",
+      "allCategories": "అన్ని వర్గాలు",
+      "allStatus": "అన్ని స్థితులు",
+      "sortBy": "క్రమం",
+      "date": "తేదీ",
+      "amount": "మొత్తం",
+      "clearFilters": "వడపోతలను క్లియర్ చేయండి"
+    },
     "categories": {
-      "seeds": "విత్తనాలు",
-      "fertilizers": "ఎరువులు",
-      "pesticides": "పురుగుమందులు",
-      "labor": "కూలీలు",
-      "equipment": "పరికరాలు",
-      "irrigation": "నీటిపారుదల",
-      "transportation": "రవాణా",
-      "others": "ఇతరములు"
+      "seeds": {
+        "title": "విత్తనాలు",
+        "cropSeeds": "పంట విత్తనాలు",
+        "hybridSeeds": "హైబ్రిడ్ విత్తనాలు",
+        "organicSeeds": "సేంద్రీయ విత్తనాలు"
+      },
+      "fertilizers": {
+        "title": "ఎరువులు",
+        "organicFertilizers": "సేంద్రీయ ఎరువులు",
+        "chemicalFertilizers": "రసాయన ఎరువులు",
+        "bioFertilizers": "జీవ ఎరువులు"
+      },
+      "labor": {
+        "title": "కూలీలు",
+        "landPreparation": "భూమి తయారీ",
+        "sowing": "విత్తనాలు వేయడం",
+        "weeding": "మలచడం",
+        "harvesting": "పంట కోత",
+        "dailyWages": "రోజువారీ వేతనాలు"
+      },
+      "equipment": {
+        "title": "పరికరాలు",
+        "machineryRent": "యంత్రాల అద్దె",
+        "toolsPurchase": "పరికరాల కొనుగోలు",
+        "maintenance": "నిర్వహణ"
+      },
+      "pesticides": {
+        "title": "పురుగుమందులు",
+        "insecticides": "కీటకనాశకాలు",
+        "fungicides": "ఫంగస్ నాశకాలు",
+        "weedicides": "మలచు మందులు"
+      },
+      "irrigation": {
+        "title": "పారుదల",
+        "waterCharges": "నీటి చార్జీలు",
+        "fuelCharges": "ఇంధన చార్జీలు",
+        "equipmentMaintenance": "పరికరాల నిర్వహణ"
+      },
+      "transportation": {
+        "title": "రవాణా",
+        "vehicleRent": "వాహన అద్దె",
+        "fuel": "ఇంధనం",
+        "loadingUnloading": "లోడ్/అన్‌లోడ్"
+      },
+      "others": {
+        "title": "ఇతరులు",
+        "miscellaneous": "ఇతర ఖర్చులు"
+      }
+    },
+    "paymentStatusFilter": {
+      "paid": "చెల్లించబడింది",
+      "pending": "పెండింగ్"
+    },
+    "paymentModeFilter": {
+      "cash": "నగదు",
+      "upi": "UPI",
+      "bankTransfer": "బ్యాంక్ ట్రాన్స్‌ఫర్",
+      "credit": "క్రెడిట్"
+    },
+    "expenseSummary": {
+      "totalExpenses": "మొత్తం ఖర్చులు",
+      "paidAmount": "చెల్లించిన మొత్తం",
+      "pendingAmount": "పెండింగ్ మొత్తం",
+      "categoryExpense": "వర్గం వారీ ఖర్చు"
+    },
+    "expenseTable": {
+      "date": "తేదీ",
+      "category": "వర్గం",
+      "subCategory": "ఉప వర్గం",
+      "description": "వివరణ",
+      "amount": "మొత్తం",
+      "paymentStatus": "చెల్లింపు స్థితి",
+      "paymentMode": "చెల్లింపు మోడ్",
+      "actions": "చర్యలు",
+      "paid": "చెల్లించబడింది",
+      "pending": "పెండింగ్",
+      "noExpenses": "ఖర్చులు కనుగొనబడలేదు",
+      "edit": "సవరించండి",
+      "delete": "తొలగించండి"
+    },
+    "addExpenses": {
+      "paid": "చెల్లించబడింది",
+      "pending": "పెండింగ్",
+      "cash": "నగదు",
+      "addNewExpense": "కొత్త ఖర్చు జోడించండి",
+      "category": "వర్గం",
+      "subCategory": "ఉప వర్గం",
+      "amount": "మొత్తం",
+      "date": "తేదీ",
+      "paymentStatus": "చెల్లింపు స్థితి",
+      "paymentMode": "చెల్లింపు మోడ్",
+      "description": "వివరణ",
+      "cancel": "రద్దు చేయండి",
+      "adding": "జోడిస్తోంది...",
+      "addExpense": "ఖర్చు జోడించండి",
+      "expenseAdded": "ఖర్చు విజయవంతంగా జోడించబడింది"
+    },
+    "expensePrint": {
+      "expenseReport": "ఖర్చు నివేదిక",
+      "totalExpenses": "మొత్తం ఖర్చులు",
+      "date": "తేదీ",
+      "category": "వర్గం",
+      "description": "వివరణ",
+      "amount": "మొత్తం",
+      "status": "స్థితి",
+      "close": "మూసివేయండి",
+      "print": "ముద్రించండి"
     }
   },
 
   "reports": {
+    "reportsAnalytics": "నివేదికలు & విశ్లేషణలు",
+    "selectFarm": "పొలం ఎంచుకోండి",
+    "selectAFarm": "ఒక పొలం ఎంచుకోండి",
     "expenseAnalysis": "ఖర్చుల విశ్లేషణ",
-    "categoryAnalysis": "వర్గ విశ్లేషణ",
-    "monthlyTrends": "నెలవారీ ధోరణులు",
-    "paymentAnalysis": "చెల్లింపుల విశ్లేషణ",
-    "exportReport": "నివేదిక ఎగుమతి",
-    "printReport": "నివేదిక ముద్రణ",
-    "filterByDate": "తేదీ ప్రకారం వడపోత",
-    "filterByCategory": "వర్గం ప్రకారం వడపోత",
-    "filterByStatus": "స్థితి ప్రకారం వడపోత",
-    "from": "నుండి",
-    "to": "వరకు",
+    "categoryDistribution": "వర్గం పంపిణీ",
+    "amount": "మొత్తం",
+    "percentage": "శాతం",
+    "count": "లెక్కింపు",
+    "categoryAnalysis": "వర్గం-వారీ విశ్లేషణ",
+    "category": "వర్గం",
+    "paymentAnalysis": "చెల్లింపు విశ్లేషణ",
+    "paymentStatus": "చెల్లింపు స్థితి పంపిణీ",
+    "paymentMode": "చెల్లింపు మోడ్ పంపిణీ",
+    "monthlyStatusTrends": "నెలవారీ స్థితి ట్రెండ్",
+    "paymentType": "చెల్లింపు రకం",
     "total": "మొత్తం",
-    "average": "సగటు",
-    "highest": "అత్యధికం",
-    "lowest": "అత్యల్పం"
+    "average": "సగటు/ఖర్చు",
+    "monthlyTrends": "నెలవారీ ట్రెండ్స్",
+    "viewType": "వీక్షణ రకం",
+    "areaChart": "ప్రాంత చార్ట్",
+    "lineChart": "లైన్ చార్ట్",
+    "timeFrame": "సమయ వ్యవధి",
+    "months": "నెలలు",
+    "averagMonthlyExp": "సగటు నెలవారీ ఖర్చు",
+    "highestMonthlyExp": "అత్యధిక నెలవారీ ఖర్చు",
+    "totalMonthlyExp": "మొత్తం ఖర్చు (కాలం)",
+    "noExpenses": "ఎంచుకున్న పొలానికి ఖర్చులు కనుగొనబడలేదు.",
+    "pleaseSelectFarm": "విశ్లేషణలను చూడటానికి దయచేసి ఒక పొలం ఎంచుకోండి."
   },
-
   "farmAI": {
-    "assistant": "ఫార్మ్ AI సహాయకుడు",
-    "chat": "AI చాట్",
-    "diseaseDetection": "వ్యాధి గుర్తింపు",
+    "assistant": "ఫార్మ్‌ఏఐ అసిస్టెంట్",
+    "chat": "ఫార్మ్‌ఏఐ చాట్",
+    "diseaseDetection": "రోగ నిర్ధారణ",
+    "chatDesc": "పంట ప్రణాళిక, ఎరువులు మరియు వ్యవసాయ సలహాల కోసం AI సహాయం పొందండి",
+    "diseaseDetectionDesc": "రోగాలను గుర్తించడానికి మరియు చికిత్స సూచనలను పొందడానికి మొక్కల చిత్రాలను అప్‌లోడ్ చేయండి",
+    "comingSoon": "రోగ నిర్ధారణ త్వరలో రాబోతోంది",
+    "tryAsking": "దీనిని గురించి అడగడానికి ప్రయత్నించండి",
     "askAnything": "వ్యవసాయం గురించి ఏదైనా అడగండి...",
     "uploadImage": "చిత్రాన్ని అప్‌లోడ్ చేయండి",
     "takePhoto": "ఫోటో తీయండి",
-    "analyzing": "విశ్లేషిస్తోంది...",
+    "analyzing": "విశ్లేషణ జరుగుతోంది...",
     "suggestions": "సూచనలు",
     "treatment": "చికిత్స",
-    "prevention": "నివారణ"
-  },
-
+    "prevention": "నివారణ",
+    "examplePrompt1": "గ్రీష్మంలో ఇసుక మట్టికి అనుకూలమైన పంటలు ఏమిటి?",
+    "examplePrompt2": "బియ్యం సాగుకు ఎరువులు సిఫార్సు చేయండి",
+    "examplePrompt3": "టమోటా ఆకుల రోగాలను నివారించడానికి ఎలా?",
+    "examplePrompt4": "సేంద్రీయ వ్యవసాయానికి ఉత్తమ పద్ధతులు"
+    },
   "errors": {
     "required": "ఈ ఫీల్డ్ అవసరం",
     "invalidEmail": "చెల్లని ఇమెయిల్ చిరునామా",

@@ -18,8 +18,11 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { useTranslation } from "react-i18next";
 
 export default function ExpenseAnalysis({ expenses }) {
+  const { t } = useTranslation();
+
   const [view, setView] = React.useState("monthly");
 
   const data = useMemo(() => {
@@ -59,7 +62,7 @@ export default function ExpenseAnalysis({ expenses }) {
     <Card sx={{ mb: 3 }}>
       <CardContent>
         <Typography variant="h6" gutterBottom>
-          Expense Analysis
+          {t("reports.expenseAnalysis")}
         </Typography>
 
         <Tabs
@@ -67,8 +70,8 @@ export default function ExpenseAnalysis({ expenses }) {
           onChange={(e, newValue) => setView(newValue)}
           sx={{ mb: 2 }}
         >
-          <Tab label="Monthly Trend" value="monthly" />
-          <Tab label="Category Distribution" value="category" />
+          <Tab label={t("reports.monthlyTrends")} value="monthly" />
+          <Tab label={t("reports.categoryDistribution")} value="category" />
         </Tabs>
 
         <Box sx={{ height: 300 }}>
